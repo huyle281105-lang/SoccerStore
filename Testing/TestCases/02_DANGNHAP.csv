@@ -1,0 +1,56 @@
+Your Company LOGO,Project Name: SoccerStore,,Test Designed by:,Hồ Quốc Nam,,,,,
+,Module Name: Đăng nhập hệ thống,,Test Designed date:,23/05/2026,,,,,
+,Release Version: 1.0,,Test Executed by:,Hồ Quốc Nam,,,,,
+,,,Test Execution date:,23/05/2026,,,,,
+Pre-condition,"- Đang ở giao diện trang đăng nhập (/Auth/SignIn).
+- Đã có tài khoản user@gmail.com / 123456 và admin@shop.com / admin123 trong CSDL.",,,,,,,,
+Test Case#,Test Title/ Scenario,Test Summary,Test Steps,Test Data,Expected Result,Post-condition,Actual Result,Status,Notes
+TC01,Đăng nhập thành công với vai trò User,Kiểm tra đăng nhập tài khoản người dùng thông thường,"1. Nhập Email và Mật khẩu chính xác của User
+2. Nhấn nút ""Đăng nhập""","Email: user@gmail.com
+Mật khẩu: 123456","Đăng nhập thành công, tạo session lưu thông tin, chuyển hướng về trang chủ /Home/Index và hiển thị ""Xin chào, user@gmail.com"".",Session được khởi tạo.,"Đăng nhập thành công, chuyển về trang chủ.",PASS,
+TC02,Đăng nhập thành công với vai trò Admin,Kiểm tra đăng nhập tài khoản quản trị viên,"1. Nhập Email và Mật khẩu chính xác của Admin
+2. Nhấn nút ""Đăng nhập""","Email: admin@shop.com
+Mật khẩu: admin123","Đăng nhập thành công, tạo session lưu thông tin Admin, chuyển hướng thẳng về trang quản trị /Home/Dashboard.",Session admin được tạo.,"Đăng nhập thành công, chuyển hướng về Dashboard.",PASS,
+TC03,Đăng nhập thất bại do sai mật khẩu,Kiểm tra báo lỗi khi nhập mật khẩu sai,"1. Nhập Email đúng
+2. Nhập Mật khẩu sai
+3. Nhấn nút ""Đăng nhập""","Email: user@gmail.com
+Mật khẩu: sai_mat_khau","Đăng nhập thất bại, hệ thống hiển thị thông báo lỗi ""Email hoặc mật khẩu không đúng!"" và giữ nguyên trang đăng nhập.",Không tạo session.,"Hiển thị lỗi ""Email hoặc mật khẩu không đúng!"".",PASS,
+TC04,Đăng nhập thất bại do email không tồn tại,Kiểm tra báo lỗi khi nhập email chưa đăng ký,"1. Nhập Email chưa đăng ký trong hệ thống
+2. Nhập mật khẩu bất kỳ
+3. Nhấn nút ""Đăng nhập""","Email: unknown@gmail.com
+Mật khẩu: 123456","Đăng nhập thất bại, hiển thị thông báo lỗi ""Email hoặc mật khẩu không đúng!"".",Không tạo session.,Hiển thị lỗi đăng nhập thất bại.,PASS,
+TC05,Đăng nhập thất bại do để trống trường Email,Kiểm tra validation khi thiếu trường Email,"1. Để trống trường Email
+2. Nhập Mật khẩu
+3. Nhấn nút ""Đăng nhập""","Email: (Trống)
+Mật khẩu: 123456","Hệ thống hiển thị lỗi ""Vui lòng nhập đầy đủ thông tin!"" và không cho phép đăng nhập.",Không tạo session.,"Hiển thị lỗi ""Vui lòng nhập đầy đủ thông tin!"".",PASS,
+TC06,Đăng nhập thất bại do để trống trường Mật khẩu,Kiểm tra validation khi thiếu trường Mật khẩu,"1. Nhập Email hợp lệ
+2. Để trống ô Mật khẩu
+3. Nhấn ""Đăng nhập""","Email: user@gmail.com
+Mật khẩu: (Trống)","Hệ thống hiển thị lỗi ""Vui lòng nhập đầy đủ thông tin!"" và không cho phép đăng nhập.",Không tạo session.,"Hiển thị lỗi ""Vui lòng nhập đầy đủ thông tin!"".",PASS,
+TC07,Đăng nhập thất bại do để trống cả Email và Mật khẩu,Kiểm tra validation khi bỏ trống cả hai trường,"1. Để trống cả Email và Mật khẩu
+2. Nhấn ""Đăng nhập""","Email: (Trống)
+Mật khẩu: (Trống)","Hệ thống hiển thị lỗi ""Vui lòng nhập đầy đủ thông tin!"" và không cho đăng nhập.",Không tạo session.,"Hiển thị lỗi ""Vui lòng nhập đầy đủ thông tin!"".",PASS,
+TC08,Đăng nhập với Email chứa khoảng trắng ở đầu và cuối,Kiểm tra tính năng tự động loại bỏ khoảng trắng dư thừa trong trường Email,"1. Nhập email có chứa khoảng trắng ở đầu và cuối
+2. Nhập mật khẩu đúng và nhấn ""Đăng nhập""","Email: ""  user@gmail.com ""
+Mật khẩu: 123456",Đăng nhập thành công (hệ thống tự động loại bỏ khoảng trắng dư thừa ở đầu và cuối).,Không tạo session.,"Đăng nhập thất bại, giao diện báo lỗi 'Email hoặc mật khẩu không đúng!' do backend không trim khoảng trắng đầu vào Email.",FAIL,Lỗi trải nghiệm/logic: Cần thêm hàm Trim() cho email trước khi đối chiếu ở backend.
+TC09,Đăng nhập bằng Email viết hoa hoàn toàn,Kiểm tra tính không phân biệt chữ hoa/thường của Email đăng nhập,"1. Nhập Email viết hoa hoàn toàn
+2. Nhập mật khẩu đúng và nhấn ""Đăng nhập""","Email: USER@gmail.com
+Mật khẩu: 123456",Đăng nhập thành công do CSDL không phân biệt chữ hoa/thường của Email.,Session được tạo.,Đăng nhập thành công.,PASS,
+TC10,Kiểm tra phân biệt chữ hoa/thường trong mật khẩu,Kiểm tra tính bảo mật phân biệt mật khẩu viết hoa viết thường,"1. Nhập Email đúng
+2. Nhập Mật khẩu đúng nhưng thay đổi chữ thường thành chữ hoa
+3. Nhấn ""Đăng nhập""","Email: user@gmail.com
+Mật khẩu: 123456 (Đúng) -> Nhập: 123456A (Sai)","Đăng nhập thất bại, hiển thị lỗi ""Email hoặc mật khẩu không đúng!"".",Không tạo session.,Báo lỗi không đăng nhập được.,PASS,
+TC11,Đăng nhập với SQL Injection trong trường Email,Kiểm tra phòng chống SQL Injection ở trường Email,"1. Nhập chuỗi SQL Injection vào ô Email
+2. Nhập mật khẩu bất kỳ và nhấn ""Đăng nhập""","Email: ' OR 1=1--
+Mật khẩu: 123","Hệ thống xử lý an toàn bằng Entity Framework (parameterized query), không bị hack, báo lỗi đăng nhập thất bại.",Không tạo session.,Báo lỗi email hoặc mật khẩu không đúng.,PASS,
+TC12,Đăng nhập với SQL Injection trong trường Mật khẩu,Kiểm tra phòng chống SQL Injection ở trường Mật khẩu,"1. Nhập Email đúng
+2. Nhập chuỗi SQL Injection vào ô Mật khẩu
+3. Nhấn ""Đăng nhập""","Email: user@gmail.com
+Mật khẩu: ' OR '1'='1","Hệ thống xử lý an toàn, báo lỗi đăng nhập thất bại.",Không tạo session.,Báo lỗi đăng nhập thất bại.,PASS,
+TC13,Nhấn phím Enter để gửi form Đăng nhập,Kiểm tra tính tiện dụng của việc nhấn Enter để đăng nhập,"1. Nhập Email và Mật khẩu đúng
+2. Nhấn phím Enter trên bàn phím","Email: user@gmail.com
+Mật khẩu: 123456",Hệ thống gửi form đăng nhập thành công và chuyển hướng về trang chủ.,Session được khởi tạo.,Đăng nhập thành công.,PASS,
+TC14,Kiểm tra liên kết Đăng ký tài khoản trên trang đăng nhập,Kiểm tra chuyển hướng từ trang Đăng nhập sang Đăng ký,"1. Nhấp liên kết ""Đăng ký ngay"" (hoặc Đăng ký) dưới form đăng nhập",Không có,Hệ thống chuyển hướng người dùng sang trang Đăng ký /Auth/SignUp.,Không thay đổi.,Chuyển hướng thành công sang /Auth/SignUp.,PASS,
+TC15,Đăng nhập khi mở nhiều tab đăng nhập,Kiểm tra hành vi session khi đăng nhập đồng thời trên nhiều tab,"1. Mở 2 tab đăng nhập trên cùng trình duyệt
+2. Đăng nhập tài khoản User ở tab 1 thành công
+3. Sang tab 2 nhấn đăng nhập tiếp",Tài khoản User,Hệ thống đồng bộ trạng thái đăng nhập trên cả 2 tab. Tab 2 chuyển hướng sang trang chủ bình thường.,Session được duy trì.,Đăng nhập hoạt động bình thường.,PASS,

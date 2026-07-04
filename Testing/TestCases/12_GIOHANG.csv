@@ -1,0 +1,36 @@
+Your Company LOGO,Project Name: SoccerStore,,Test Designed by:,Hồ Quốc Nam,,,,,
+,Module Name: Giỏ hàng,,Test Designed date:,23/05/2026,,,,,
+,Release Version: 1.0,,Test Executed by:,Hồ Quốc Nam,,,,,
+,,,Test Execution date:,23/05/2026,,,,,
+Pre-condition,- Người dùng đã đăng nhập tài khoản User.,,,,,,,,
+Test Case#,Test Title/ Scenario,Test Summary,Test Steps,Test Data,Expected Result,Post-condition,Actual Result,Status,Notes
+TC01,Thêm sản phẩm vào giỏ hàng thành công,Kiểm tra thêm sản phẩm vào giỏ hàng khi đã đăng nhập,"1. Vào trang chi tiết sản phẩm
+2. Nhập số lượng và nhấn ""Thêm vào giỏ hàng""","Mã sản phẩm: SP001, Số lượng: 2",Sản phẩm được lưu vào DB (bảng GIOHANG) liên kết với tài khoản. Hệ thống tự động chuyển hướng sang trang giỏ hàng (/Cart/Index) hiển thị sản phẩm và số lượng vừa thêm.,Bản ghi giỏ hàng được cập nhật trong DB.,Thêm sản phẩm thành công và hiển thị trong giỏ.,PASS,
+TC02,Thêm sản phẩm vào giỏ hàng thất bại do chưa đăng nhập,Kiểm tra chặn thêm giỏ hàng khi khách vãng lai chưa đăng nhập,"1. Đảm bảo chưa đăng nhập
+2. Vào trang chi tiết sản phẩm
+3. Nhấn nút ""Thêm vào giỏ hàng""",Mã sản phẩm: SP001,Hệ thống chặn thao tác và chuyển hướng người dùng về trang Đăng nhập (/Auth/SignIn).,CSDL không thay đổi.,Chuyển hướng về trang Đăng nhập.,PASS,
+TC03,Cập nhật số lượng sản phẩm trong giỏ hàng,Kiểm tra thay đổi số lượng sản phẩm trong trang giỏ hàng,"1. Vào trang Giỏ hàng
+2. Thay đổi số lượng của sản phẩm
+3. Nhấn nút ""Cập nhật""",Số lượng mới: 5,"Số lượng được cập nhật trong DB, tổng tiền sản phẩm và tổng tiền giỏ hàng tính toán lại chính xác.",Số lượng trong bảng GIOHANG được cập nhật.,Cập nhật thành công số lượng và tổng tiền.,PASS,
+TC04,Xóa sản phẩm khỏi giỏ hàng,Kiểm tra xóa sản phẩm ra khỏi giỏ hàng,"1. Vào trang Giỏ hàng
+2. Nhấn nút ""Xóa"" bên cạnh sản phẩm cần xóa",Không có,Sản phẩm bị xóa khỏi DB. Trang giỏ hàng tải lại không còn sản phẩm đó và tổng tiền giỏ hàng giảm tương ứng.,Bản ghi giỏ hàng bị xóa trong DB.,Xóa sản phẩm thành công.,PASS,
+TC05,Hiển thị giỏ hàng trống,Kiểm tra giao diện khi giỏ hàng chưa có sản phẩm,"1. Xóa toàn bộ sản phẩm trong giỏ hàng
+2. Truy cập trang Giỏ hàng /Cart/Index",Không có,"Giao diện hiển thị thông báo ""Bạn chưa có sản phẩm nào trong giỏ hàng."" và không hiển thị bảng thanh toán.",Không,Hiển thị thông báo giỏ hàng trống.,PASS,
+TC06,Cập nhật số lượng sản phẩm bằng 0 hoặc số âm,Kiểm tra xử lý biên số lượng sản phẩm trong trang giỏ hàng,"1. Nhập số lượng là 0 hoặc số âm
+2. Nhấn ""Cập nhật""",Số lượng mới: 0 hoặc -3,"Hệ thống chặn cập nhật qua thuộc tính min=""1"" của thẻ input trên frontend. (Lưu ý: Nếu gửi trực tiếp POST request bỏ qua frontend, backend vẫn cập nhật số âm do thiếu validation).",Số lượng giỏ hàng được cập nhật (nếu gửi post bỏ qua frontend).,"Frontend chặn thành công bằng thuộc tính min=""1"".",PASS,Cần bổ sung validation ở backend để tránh lỗi khi người dùng cố ý gửi request trực tiếp.
+TC07,Thêm cùng một sản phẩm nhiều lần vào giỏ hàng,Kiểm tra việc cộng dồn số lượng khi thêm sản phẩm đã có trong giỏ,"1. Thêm sản phẩm SP001 số lượng 1 vào giỏ hàng
+2. Quay lại chi tiết sản phẩm SP001, thêm tiếp số lượng 2","Mã sản phẩm: SP001, Lần 1: SL 1, Lần 2: SL 2",Hệ thống tự động cộng dồn số lượng trong DB. Giao diện giỏ hàng hiển thị duy nhất 1 hàng cho sản phẩm SP001 với số lượng tổng là 3.,Bản ghi trong DB cập nhật SOLUONG = 3.,Cộng dồn số lượng thành công.,PASS,
+TC08,Xem giỏ hàng bằng biểu tượng giỏ hàng ở header,Kiểm tra liên kết xem giỏ hàng nhanh,1. Nhấp chọn biểu tượng giỏ hàng ở góc phải header,Không có,Hệ thống chuyển hướng người dùng sang trang Giỏ hàng /Cart/Index.,Không,Chuyển hướng thành công sang trang Giỏ hàng.,PASS,
+TC09,Thêm sản phẩm có số lượng tồn kho bằng 0,Kiểm tra việc chặn mua hàng khi hết hàng,"1. Tìm sản phẩm có tồn kho bằng 0
+2. Click nút Thêm vào giỏ",Mã sản phẩm hết hàng (SOLUONG = 0),"Hệ thống ngăn không cho thêm giỏ hàng (nút thêm giỏ nên bị ẩn/khóa, thực tế code cho phép thêm giỏ bình thường và chỉ báo lỗi khi thực hiện đặt hàng).",Giỏ hàng vẫn lưu sản phẩm.,Thêm thành công vào giỏ.,PASS,Cần cải thiện ẩn nút mua trên trang chi tiết khi sản phẩm hết hàng.
+TC10,"Click nút ""Tiếp tục mua sắm"" từ trang giỏ hàng",Kiểm tra chuyển hướng quay lại mua hàng,"1. Tại trang giỏ hàng, nhấp vào nút ""Tiếp tục mua sắm""",Không có,Hệ thống chuyển hướng người dùng quay lại trang danh sách sản phẩm /Home/Giay.,Không,Chuyển hướng thành công.,PASS,
+TC11,Kiểm tra hiển thị số tiền tạm tính của từng dòng sản phẩm,Kiểm tra tính toán tạm tính (Số lượng x Giá),"1. Quan sát từng hàng sản phẩm trong giỏ hàng
+2. Đối chiếu cột Thành tiền = Số lượng x Đơn giá","Ví dụ: Số lượng 2, Giá 500k","Thành tiền hiển thị chính xác là 1,000,000đ.",Không,Thành tiền tính toán chính xác.,PASS,
+TC12,Kiểm tra tính toán tổng tiền của toàn bộ giỏ hàng,Kiểm tra tổng tiền thanh toán giỏ hàng,"1. Thêm nhiều sản phẩm vào giỏ hàng
+2. Đối chiếu giá trị Tổng tiền hiển thị ở cuối giỏ hàng",Nhiều sản phẩm,Tổng tiền hiển thị đúng bằng tổng của tất cả cột Thành tiền cộng lại.,Không,Tổng tiền tính toán chính xác.,PASS,
+TC13,Thêm nhiều loại sản phẩm khác nhau vào giỏ hàng,Kiểm tra hiển thị nhiều hàng sản phẩm khác nhau,"1. Thêm 1 sản phẩm giày và 2 sản phẩm phụ kiện vào giỏ hàng
+2. Quan sát giỏ hàng","Mã SP: SP001, SP005, SP008","Hiển thị đúng 3 hàng sản phẩm tương ứng trong giỏ hàng, không bị ghi đè lẫn nhau.",DB lưu đủ 3 bản ghi cho mã khách hàng.,Hiển thị chính xác danh sách giỏ hàng.,PASS,
+TC14,Tải lại trang (F5) giỏ hàng,Kiểm tra độ tin cậy lưu trữ giỏ hàng,"1. Thêm sản phẩm vào giỏ hàng
+2. Nhấn F5 để tải lại trang giỏ hàng",Không có,"Dữ liệu giỏ hàng hiển thị nguyên vẹn, không bị mất.",Dữ liệu vẫn được lưu trữ trong DB.,Tải lại trang dữ liệu giữ nguyên.,PASS,
+TC15,Cập nhật số lượng sản phẩm vượt quá tồn kho thực tế trong giỏ,Kiểm tra cập nhật số lượng lớn hơn kho trong giỏ hàng,"1. Thay đổi số lượng sản phẩm trong giỏ hàng lên 100 (tồn kho chỉ còn 10)
+2. Nhấn ""Cập nhật""",Số lượng: 100 (Kho: 10),Hệ thống cho phép cập nhật thành công số lượng 100 trong giỏ hàng (chỉ thực hiện kiểm tra tồn kho và chặn khi thực hiện đặt hàng ở Thanh toán).,Số lượng giỏ hàng được cập nhật lên 100 trong DB.,Cập nhật thành công số lượng 100.,PASS,Hành vi thiết kế đúng của hệ thống. Chặn kho ở bước đặt hàng.

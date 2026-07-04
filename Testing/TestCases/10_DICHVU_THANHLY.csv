@@ -1,0 +1,17 @@
+Your Company LOGO,Project Name: SoccerStore,,Test Designed by:,Hồ Quốc Nam,,,,,
+,Module Name: Dịch vụ Thanh lý & Ký gửi,,Test Designed date:,23/05/2026,,,,,
+,Release Version: 1.0,,Test Executed by:,Hồ Quốc Nam,,,,,
+,,,Test Execution date:,23/05/2026,,,,,
+Pre-condition,- Đang truy cập trang Dịch vụ Thanh lý & Ký gửi (/Home/ThanhLyVaKyGui).,,,,,,,,
+Test Case#,Test Title/ Scenario,Test Summary,Test Steps,Test Data,Expected Result,Post-condition,Actual Result,Status,Notes
+TC01,Xem danh sách sản phẩm Thanh lý & Ký gửi,Kiểm tra hiển thị danh sách sản phẩm thanh lý ký gửi,"1. Truy cập trang Thanh lý & Ký gửi
+2. Quan sát danh sách sản phẩm hiển thị",Không có,"Hiển thị đúng danh sách sản phẩm được lọc theo các mã sản phẩm cố định trong code (SP039, SP028, SP034, SP041, SP051, SP070, SP072, SP105, SP118, SP069).",Không,Hiển thị chính xác các sản phẩm thanh lý.,PASS,
+TC02,Click vào sản phẩm thanh lý để xem chi tiết,Kiểm tra xem chi tiết sản phẩm thanh lý,"1. Click vào một sản phẩm trong trang Thanh lý
+2. Quan sát trang chi tiết",Sản phẩm thanh lý,Chuyển hướng thành công sang trang chi tiết của sản phẩm đó để khách hàng xem tình trạng.,Không,Chuyển hướng thành công.,PASS,
+TC03,Thêm sản phẩm thanh lý vào giỏ hàng,Kiểm tra mua sản phẩm thanh lý ký gửi,"1. Tại trang chi tiết sản phẩm thanh lý, nhấn ""Thêm vào giỏ hàng""
+2. Kiểm tra trong giỏ hàng",Sản phẩm thanh lý,Sản phẩm được thêm vào giỏ hàng thành công với giá bán thanh lý.,Tạo bản ghi trong giỏ hàng.,Sản phẩm thêm vào giỏ hàng thành công.,PASS,
+TC04,Đặt mua sản phẩm thanh lý và cập nhật kho,Kiểm tra mua hàng thanh lý và trừ tồn kho,"1. Thực hiện đặt hàng thành công đơn hàng có chứa sản phẩm thanh lý
+2. Kiểm tra số lượng tồn kho sản phẩm đó trong DB",Sản phẩm thanh lý,Đặt hàng thành công và số lượng sản phẩm thanh lý trong DB bị trừ đi tương ứng.,Số lượng trong DB bị giảm.,"Đặt hàng thành công, tồn kho cập nhật đúng.",PASS,
+TC05,Kiểm tra hiển thị giá thanh lý đặc biệt,Kiểm tra giá sản phẩm thanh lý có đúng mức ưu đãi không,1. Quan sát giá sản phẩm trên trang thanh lý ký gửi,Không có,Hiển thị giá thanh lý rẻ hơn so với giá bán gốc của sản phẩm mới.,Không,Giá hiển thị chính xác.,PASS,
+TC06,Kiểm tra khi sản phẩm thanh lý hết hàng,Kiểm tra trạng thái sản phẩm thanh lý có tồn kho bằng 0,"1. Chỉnh sửa số lượng sản phẩm thanh lý trong DB về 0
+2. Truy cập trang Thanh lý & Ký gửi",Sản phẩm thanh lý có số lượng = 0,"Sản phẩm hiển thị trạng thái ""Hết hàng"" (hoặc không cho mua trên giao diện).",Không,Hiển thị trạng thái hết hàng.,PASS,

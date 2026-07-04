@@ -1,0 +1,98 @@
+﻿@model ShopBanGiay_Nhom13.Models.SANPHAM
+
+@{
+    ViewBag.Title = "Sửa sản phẩm";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container mt-4">
+
+    <h2 class="text-white mb-4">Chỉnh sửa sản phẩm</h2>
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">@TempData["Error"]</div>
+    }
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">@TempData["Success"]</div>
+    }
+
+    <form method="post" enctype="multipart/form-data">
+
+        <div class="form-group mb-3">
+            <label class="text-light">Mã sản phẩm</label>
+            <input type="text" class="form-control" name="MASP" value="@Model.MASP" readonly />
+        </div>
+
+        <div class="form-group mb-3">
+            <label class="text-light">Tên sản phẩm</label>
+            <input type="text" class="form-control" name="TENSP" value="@Model.TENSP" required />
+        </div>
+
+        <div class="form-group mb-3">
+            <label class="text-light">Ảnh hiện tại</label> <br />
+            <img src="~/Content/Images/@Model.HINHANH"
+                 style="width:150px;height:150px;object-fit:cover;border-radius:10px;border:2px solid #444" />
+        </div>
+
+        <div class="form-group mb-3">
+            <label class="text-light">Thay ảnh mới (tùy chọn)</label>
+            <input type="file" class="form-control" name="upload" />
+        </div>
+
+        <div class="form-group mb-3">
+            <label class="text-light">Số lượng</label>
+            <input type="number" class="form-control" name="SOLUONG" value="@Model.SOLUONG" min="0" required />
+        </div>
+
+        <div class="form-group mb-3">
+            <label class="text-light">Giá (₫)</label>
+            <input type="number" class="form-control" name="GIA" value="@Model.GIA" min="1" required />
+        </div>
+
+        <div class="form-group mb-3">
+            <label class="text-light">Mô tả</label>
+            <textarea class="form-control" name="MOTA" rows="4">@Model.MOTA</textarea>
+        </div>
+
+        <div class="form-group mb-3">
+            <label class="text-light">Loại sản phẩm</label>
+            <select class="form-control" name="MAL" required>
+                <option value="">-- Chọn loại --</option>
+                @foreach (var item in ViewBag.Loai)
+                {
+                    <option value="@item.MAL" @(item.MAL == Model.MAL ? "selected" : "")>@item.TENL</option>
+                }
+            </select>
+        </div>
+
+        <div class="form-group mb-3">
+            <label class="text-light">Thương hiệu</label>
+            <select class="form-control" name="MATH" required>
+                <option value="">-- Chọn thương hiệu --</option>
+                @foreach (var item in ViewBag.ThuongHieu)
+                {
+                    <option value="@item.MATH" @(item.MATH == Model.MATH ? "selected" : "")>@item.TENTH</option>
+                }
+            </select>
+        </div>
+
+        <div class="form-group mb-3">
+            <label class="text-light">Khuyến mãi (tùy chọn)</label>
+            <select class="form-control" name="MAKM">
+                <option value="">Không áp dụng</option>
+                @foreach (var item in ViewBag.KhuyenMai)
+                {
+                    <option value="@item.MAKM" @(item.MAKM == Model.MAKM ? "selected" : "")>@item.TENKM</option>
+                }
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-success">✔ Lưu thay đổi</button>
+        <a href="@Url.Action("Dashboard", "Home")" class="btn btn-secondary ms-2">↩ Quay lại</a>
+
+    </form>
+
+</div>

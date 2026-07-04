@@ -1,0 +1,26 @@
+Your Company LOGO,Project Name: SoccerStore,,Test Designed by:,Hồ Quốc Nam,,,,,
+,Module Name: Chi tiết sản phẩm,,Test Designed date:,23/05/2026,,,,,
+,Release Version: 1.0,,Test Executed by:,Hồ Quốc Nam,,,,,
+,,,Test Execution date:,23/05/2026,,,,,
+Pre-condition,- Đang xem trang chi tiết một sản phẩm bất kỳ (/Home/ChiTietSanPham?masp=SP001).,,,,,,,,
+Test Case#,Test Title/ Scenario,Test Summary,Test Steps,Test Data,Expected Result,Post-condition,Actual Result,Status,Notes
+TC01,Xem thông tin chi tiết sản phẩm đầy đủ,Kiểm tra các thông tin chi tiết sản phẩm hiển thị đúng,1. Quan sát các thành phần trên trang chi tiết sản phẩm,Mã sản phẩm: SP001,"Hiển thị đầy đủ: Tên sản phẩm, Mã sản phẩm, Thương hiệu, Loại, Giá (kèm phần trăm giảm và giá gốc nếu có khuyến mãi), Mô tả sản phẩm, ảnh lớn, khung chọn Size và chọn Số lượng.",Không,Hiển thị chính xác thông tin sản phẩm.,PASS,
+TC02,Chọn size trên trang chi tiết sản phẩm,Kiểm tra tính năng chọn size giày của khách hàng,"1. Nhấp chọn một nút số size bất kỳ (ví dụ: 41)
+2. Nhấn nút ""Thêm vào giỏ hàng""",Size giày: 41,"Sản phẩm được thêm vào giỏ hàng thành công, nhưng thông tin kích thước (size) không được lưu trữ trong giỏ hàng ở CSDL (bảng GIOHANG không có cột lưu size, controller không nhận tham số size).",Không lưu size vào CSDL.,"Thêm sản phẩm thành công, thông tin size không lưu.",PASS,Hành vi thực tế của mã nguồn không hỗ trợ lưu size sản phẩm trong giỏ hàng.
+TC03,Xem chi tiết sản phẩm không tồn tại,Kiểm tra cách hệ thống xử lý khi mã sản phẩm sai,"1. Truy cập trực tiếp link chi tiết sản phẩm với mã không tồn tại
+2. Quan sát hành vi hệ thống",Mã sản phẩm: SP_KHONG_CO,"Hệ thống chuyển hướng an toàn quay lại trang chủ /Home/Index (do dòng check `if (ctsp == null) return RedirectToAction(""Index"")` trong HomeController).",Không,Quay lại trang chủ thành công.,PASS,
+TC04,Nhập số lượng lớn hơn tồn kho trên trang chi tiết,Kiểm tra việc cho phép thêm số lượng vượt tồn kho từ trang chi tiết,"1. Xem tồn kho sản phẩm (ví dụ còn 5)
+2. Nhập số lượng mua là 10 và nhấn ""Thêm vào giỏ hàng""",Số lượng: 10 (Tồn kho: 5),Thêm sản phẩm thành công vào giỏ hàng mà không báo lỗi ở trang chi tiết (Kiểm tra tồn kho chỉ thực hiện khi thực tế Lưu hóa đơn đặt hàng).,Sản phẩm được thêm vào giỏ trong DB.,Thêm thành công vào giỏ hàng.,PASS,Đúng với thiết kế mã nguồn hiện tại.
+TC05,Tăng số lượng sản phẩm bằng nút cộng (+),Kiểm tra nút tăng số lượng trên giao diện chi tiết,"1. Click vào nút ""+"" bên cạnh ô số lượng
+2. Quan sát giá trị ô số lượng",Không có,Số lượng trong ô nhập tăng từ 1 lên 2.,Không,Số lượng tăng chính xác.,PASS,
+TC06,Giảm số lượng sản phẩm bằng nút trừ (-),Kiểm tra nút giảm số lượng trên giao diện chi tiết,"1. Click nút ""+"" để tăng lên 2
+2. Click nút ""-"" bên cạnh ô số lượng
+3. Quan sát giá trị ô số lượng",Không có,Số lượng trong ô nhập giảm từ 2 xuống 1.,Không,Số lượng giảm chính xác.,PASS,
+TC07,Nhập trực tiếp số lượng là 0 vào ô số lượng mua,Kiểm tra validation số lượng bằng 0,"1. Nhập trực tiếp số ""0"" vào ô số lượng mua
+2. Nhấn nút ""Thêm vào giỏ hàng""",Số lượng: 0,"Hệ thống/Trình duyệt chặn không cho submit form nhờ thuộc tính min=""1"" của thẻ input.",Không,Form bị chặn không cho gửi.,PASS,
+TC08,Nhập số lượng là số âm vào ô số lượng mua,Kiểm tra validation số lượng là số âm,"1. Nhập trực tiếp số ""-5"" vào ô số lượng mua
+2. Nhấn ""Thêm vào giỏ hàng""",Số lượng: -5,"Trình duyệt chặn submit form do giá trị nhỏ hơn min=""1"".",Không,Form bị chặn.,PASS,
+TC09,Nhập ký tự không phải số vào ô số lượng mua,Kiểm tra validation định dạng số lượng,"1. Nhập ký tự chữ ""abc"" vào ô số lượng mua
+2. Nhấn ""Thêm vào giỏ hàng""",Số lượng: abc,Trình duyệt ngăn cản nhập ký tự không phải số hoặc chặn submit form.,Không,Trình duyệt chặn thành công.,PASS,
+TC10,Click vào ảnh chính sản phẩm để phóng to,Kiểm tra xem ảnh sản phẩm có thể click mở lớn không,"1. Đưa chuột và click vào ảnh sản phẩm chính
+2. Quan sát hiển thị",Không có,Ảnh sản phẩm hiển thị phóng to (lightbox) hoặc zoom ảnh mượt mà.,Không,Ảnh hiển thị đúng.,PASS,

@@ -1,0 +1,176 @@
+﻿@{
+    ViewBag.Title = "Trang chủ";
+    Layout = "~/Views/Shared/_LayoutKhachHang.cshtml";
+    List<SANPHAM> dsSPNB = ViewBag.spNB as List<SANPHAM>;
+}
+@using ShopBanGiay_Nhom13.Models;
+
+<link href="~/Content/Site.css" rel="stylesheet" />
+<main>
+    <div class="container">
+        <!-- Banner Section -->
+        <div class="row g-3 my-2">
+            <div class="col-5 banner-left">
+                <div class="banner-card h-100">
+                    <img src="~/Content/Images/banner1.jpg" alt="Nike boots">
+                    <a href="@Url.Action("Giay", "Home")" class="btn-shop btn p-auto">SHOP NOW</a>
+                </div>
+            </div>
+            <div class="col-3 banner-center">
+                <div class="banner-card h-100">
+                    <img src="~/Content/Images/banner2.jpg" alt="Adidas shoes">
+                </div>
+            </div>
+            <div class="col-4 banner-right">
+                <div class="row g-3 h-100">
+                    <div class="col-12 h-50">
+                        <div class="banner-card">
+                            <img src="~/Content/Images/banner3.jpg" alt="Adidas shoes">
+                        </div>
+                    </div>
+                    <div class="col-12 h-50">
+                        <div class="banner-card my-4">
+                            <img src="~/Content/Images/banner4.jpg" alt="Adidas Coral Blaze">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Service Row -->
+        <div class="service-box mt-4">
+            <div class="row text-center">
+                <div class="col">
+                    <div class="service-item">
+                        <i class="service-icon fa-solid fa-map-location-dot"></i>
+                        <p>Hệ thống <span>5 cửa hàng </span>hàng có sẵn</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="service-item">
+                        <i class="service-icon fa-solid fa-truck-fast"></i>
+                        <p>Giao hàng <span>miễn phí</span>, Real time tracking</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="service-item">
+                        <i class="service-icon fa-solid fa-rotate-left"></i>
+                        <p><span>Đổi trả thoải mái</span>, không giới hạn</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="service-item">
+                        <i class="service-icon fa-solid fa-rotate"></i>
+                        <p><span>Gửi 2 chọn 1</span>, hỗ trợ thử size</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="service-item">
+                        <i class="service-icon fa-solid fa-phone-volume"></i>
+                        <p><span>Hỗ trợ 24/7</span> qua tất cả mọi kênh</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Featured List img -->
+        <div class="row featured-section">
+            <h2 class="text-center text-white my-5 p-1">Quan tâm hàng đầu</h2>
+            <div class="col">
+                <div class="card card-featured">
+                    <a href="#"><img class="card-img" src="~/Content/Images/featured-1.png" /></a>
+                    <div class="card-body"><p class="card-title text-center">Nike Mecurial</p></div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card card-featured">
+                    <a href="#"><img class="card-img" src="~/Content/Images/featured-2.png" /></a>
+                    <div class="card-body"><p class="card-title text-center">Nike Mecurial</p></div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card card-featured">
+                    <a href="#"><img class="card-img" src="~/Content/Images/featured-3.png" /></a>
+                    <div class="card-body"><p class="card-title text-center">Nike Mecurial</p></div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card card-featured">
+                    <a href="#"><img class="card-img" src="~/Content/Images/featured-4.jpg" /></a>
+                    <div class="card-body"><p class="card-title text-center">Nike Mecurial</p></div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card card-featured">
+                    <a href="#"><img class="card-img" src="~/Content/Images/featured-5.png" /></a>
+                    <div class="card-body"><p class="card-title text-center">Nike Mecurial</p></div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card card-featured">
+                    <a href="#"><img class="card-img" src="~/Content/Images/featured-6.png" /></a>
+                    <div class="card-body"><p class="card-title text-center">Nike Mecurial</p></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Featured Products -->
+        <div class="row my-3">
+            <h2 class="text-center text-white my-5 p-1">Sản phẩm nổi bật</h2>
+            @foreach (var sp in dsSPNB)
+            {
+                <div class="col-3 mb-3">
+                    <div class="card card-product card-item border-1">
+                        <img class="card-img product-img" src="~/Content/Images/@sp.HINHANH" />
+                        <div class="card-body">
+                            <p style="height: 80px;">@sp.TENSP</p>
+                            <p class="text-danger">@String.Format("{0:N0} ₫", sp.GIA)</p>
+                            <div class="text-end">
+                                <a class="text-decoration-none btn btn-secondary" href="/Home/ChiTietSanPham/?masp=@sp.MASP">Xem chi tiết</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</main>
+
+<style>
+    .product-card {
+        background-color: #141414;
+        border: 1px solid #222;
+        border-radius: 8px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        height: 100%;
+    }
+
+    .card-body {
+        position: relative;
+        z-index: 2;
+        color: white;
+    }
+
+    .card-item {
+        background: #1a1a1a;
+        border-color: #232323;
+        padding: 8px;
+        z-index: 2;
+    }
+
+    .card-item img {
+        background: #1a1a1a;
+        padding: 8px;
+        z-index: 2;
+    }
+    .product-img {
+        height: 260px;
+        width: 100%;
+        object-fit: contain; /* Hoặc cover tuỳ mày */
+        background-color: #1a1a1a;
+        padding: 10px;
+    }
+</style>
+
+

@@ -1,0 +1,54 @@
+Your Company LOGO,Project Name: SoccerStore,,Test Designed by:,Hồ Quốc Nam,,,,,
+,Module Name: Quản lý sản phẩm Admin,,Test Designed date:,23/05/2026,,,,,
+,Release Version: 1.0,,Test Executed by:,Hồ Quốc Nam,,,,,
+,,,Test Execution date:,23/05/2026,,,,,
+Pre-condition,- Đăng nhập bằng tài khoản có quyền Admin (admin@shop.com / admin123).,,,,,,,,
+Test Case#,Test Title/ Scenario,Test Summary,Test Steps,Test Data,Expected Result,Post-condition,Actual Result,Status,Notes
+TC01,Thêm sản phẩm mới thành công,Kiểm tra chức năng thêm sản phẩm mới của Admin,"1. Tại Dashboard, nhấn nút ""Thêm sản phẩm""
+2. Nhập Mã sản phẩm (chưa tồn tại), Tên sản phẩm, Số lượng, Giá, Mô tả
+3. Chọn hình ảnh sản phẩm từ máy tính
+4. Chọn Loại, Thương hiệu và Khuyến mãi
+5. Nhấn nút ""Thêm sản phẩm""","MASP: SP999
+TENSP: Giày Thử Nghiệm
+SOLUONG: 50
+GIA: 1800000
+Ảnh: test.jpg
+Loại: L002
+Thương hiệu: TH001","Sản phẩm mới được thêm vào DB. File hình ảnh được tải lên thư mục ~/Content/Images. Redirect về Dashboard, hiển thị thông báo thành công ""Thêm sản phẩm thành công!"".",Sản phẩm SP999 được tạo mới trong DB.,"Thêm sản phẩm thành công, xuất hiện ở danh sách.",PASS,
+TC02,Thêm sản phẩm thất bại do trùng mã sản phẩm,Kiểm tra chặn thêm sản phẩm khi mã sản phẩm đã tồn tại,"1. Nhập Mã sản phẩm đã có trong DB
+2. Nhập các thông tin khác hợp lệ và nhấn ""Thêm sản phẩm""","MASP: SP001 (đã tồn tại)
+TENSP: Giày Adidas
+SOLUONG: 10
+GIA: 1200000","Thêm thất bại. Hệ thống hiển thị thông báo lỗi ""Mã sản phẩm đã tồn tại! Vui lòng nhập mã khác."" và không thêm vào DB.",Cơ sở dữ liệu không thay đổi.,Hiển thị lỗi trùng mã sản phẩm.,PASS,
+TC03,Sửa thông tin sản phẩm thành công,Kiểm tra chức năng cập nhật thông tin sản phẩm,"1. Tại Dashboard, nhấn nút ""Sửa"" bên cạnh sản phẩm SP999
+2. Thay đổi các thông tin (ví dụ: Số lượng, Giá)
+3. Nhấn nút ""Cập nhật sản phẩm"" (hoặc submit form)","MASP: SP999
+SOLUONG mới: 60
+GIA mới: 1900000","Thông tin sản phẩm được cập nhật thành công trong CSDL. Chuyển hướng về Dashboard hiển thị thông báo ""Cập nhật sản phẩm thành công!"".",Sản phẩm trong DB được cập nhật thông tin mới.,Cập nhật thành công thông tin sản phẩm.,PASS,
+TC04,Xóa sản phẩm thành công,Kiểm tra chức năng xóa sản phẩm khỏi hệ thống,"1. Tại Dashboard, nhấn nút ""Xóa"" bên cạnh sản phẩm SP999
+2. Nhấn ""OK"" trên hộp thoại xác nhận xóa",Mã sản phẩm: SP999,"Sản phẩm bị xóa khỏi cơ sở dữ liệu. Trang Dashboard tải lại, không còn sản phẩm SP999 và hiển thị thông báo ""Đã xóa vĩnh viễn sản phẩm: Giày Thử Nghiệm"".",Bản ghi sản phẩm bị xóa khỏi DB.,Xóa sản phẩm thành công khỏi danh sách.,PASS,
+TC05,Xóa sản phẩm thất bại do lỗi ràng buộc khóa ngoại,Kiểm tra chặn xóa sản phẩm khi đã có hóa đơn liên quan,"1. Nhấn nút ""Xóa"" đối với sản phẩm đã có trong chi tiết hóa đơn đã lưu trong DB
+2. Xác nhận xóa",Mã sản phẩm: SP001 (đã bán trong hóa đơn HD001),"Xóa thất bại. Hệ thống bắt ngoại lệ khi SaveChanges (SqlException lỗi foreign key constraint) và hiển thị thông báo lỗi trên Dashboard, sản phẩm không bị xóa.",Sản phẩm giữ nguyên trong DB.,Hiển thị thông báo lỗi ràng buộc dữ liệu.,PASS,Ràng buộc khóa ngoại ngăn không cho xóa sản phẩm đã bán.
+TC06,Thêm sản phẩm mới với Giá hoặc Số lượng âm,Kiểm tra validation giá trị biên số lượng và giá sản phẩm,"1. Nhập Số lượng âm (-5) hoặc Giá âm (-100000)
+2. Điền đủ thông tin khác và nhấn thêm","GIA: -100000
+SOLUONG: -5","Hệ thống chặn submit do thuộc tính min=""1"" của thẻ input trên giao diện.",Không thêm sản phẩm.,Chặn submit thành công.,PASS,
+TC07,Thêm sản phẩm mới để trống Tên sản phẩm,Kiểm tra validation trường tên sản phẩm trống,"1. Tại trang thêm sản phẩm, để trống Tên sản phẩm
+2. Điền đủ thông tin khác và click ""Thêm sản phẩm""",Tên sản phẩm: (Trống),"Hệ thống chặn và báo lỗi ""Vui lòng nhập đầy đủ thông tin!"" ở giao diện.",Không thêm sản phẩm vào DB.,Báo lỗi thiếu thông tin.,PASS,
+TC08,Thêm sản phẩm mới để trống Giá sản phẩm,Kiểm tra validation trường giá sản phẩm trống,"1. Để trống ô Giá sản phẩm
+2. Điền các thông tin khác hợp lệ và click thêm",Giá sản phẩm: (Trống),"Hệ thống chặn và báo lỗi ""Vui lòng nhập đầy đủ thông tin!"".",Không thêm sản phẩm.,Báo lỗi thiếu thông tin.,PASS,
+TC09,Thêm sản phẩm mới để trống Số lượng sản phẩm,Kiểm tra validation trường số lượng trống,"1. Để trống ô Số lượng sản phẩm
+2. Điền các thông tin khác hợp lệ và click thêm",Số lượng sản phẩm: (Trống),"Hệ thống chặn và báo lỗi ""Vui lòng nhập đầy đủ thông tin!"".",Không thêm sản phẩm.,Báo lỗi thiếu thông tin.,PASS,
+TC10,Sửa sản phẩm và tải lên hình ảnh mới,Kiểm tra cập nhật ảnh sản phẩm khi sửa,"1. Click nút ""Sửa"" sản phẩm
+2. Chọn tệp ảnh mới khác ảnh cũ
+3. Click ""Cập nhật sản phẩm""",Ảnh mới: new_photo.jpg,"Ảnh mới được tải lên thư mục Content/Images, cập nhật tên file ảnh trong DB, hiển thị ảnh mới trên Dashboard.",Tên file ảnh mới được lưu trong DB.,Cập nhật ảnh sản phẩm thành công.,PASS,
+TC11,Sửa sản phẩm và giữ nguyên hình ảnh cũ,Kiểm tra sửa sản phẩm không chọn file ảnh mới,"1. Click nút ""Sửa"" sản phẩm
+2. Không chọn file ảnh mới (để trống ô upload)
+3. Click ""Cập nhật sản phẩm""",Không chọn file ảnh,"Hệ thống cập nhật các thông tin văn bản khác, tên file ảnh cũ trong DB giữ nguyên, không bị null hay trống.",Tên ảnh cũ giữ nguyên trong DB.,"Sửa sản phẩm thành công, ảnh cũ được giữ lại.",PASS,Dòng code: `if (upload != null && upload.ContentLength > 0)`.
+TC12,Thêm sản phẩm mới với file ảnh không đúng định dạng,Kiểm tra validation định dạng tệp ảnh tải lên,"1. Tại form thêm sản phẩm, chọn tệp upload là file văn bản ""document.txt""
+2. Điền đủ thông tin khác và click thêm",Tệp: document.txt,Hệ thống từ chối tải lên và hiển thị thông báo lỗi yêu cầu tệp hình ảnh hợp lệ (.jpg\.png\.jpeg),"File txt được lưu vào Images, sản phẩm được tạo.",Thêm sản phẩm thành công.,FAIL,"Nên thêm kiểm tra phần mở rộng file ảnh (.jpg, .png, .jpeg) ở backend."
+TC13,Thêm sản phẩm mới với file ảnh dung lượng lớn,Kiểm tra giới hạn kích thước tệp upload,"1. Chọn file ảnh dung lượng lớn (ví dụ: 15MB)
+2. Điền đủ thông tin và nhấn ""Thêm sản phẩm""",Ảnh: 15MB,"Hệ thống báo lỗi IIS ""Maximum request length exceeded"" nếu vượt quá cấu hình mặc định (4MB) của ASP.NET.",Không thêm sản phẩm.,IIS chặn request và báo lỗi server.,PASS,
+TC14,Sửa sản phẩm với mã sản phẩm không tồn tại,Kiểm tra xử lý khi truy cập trực tiếp url sửa sản phẩm với mã sai,"1. Truy cập trực tiếp link /Home/EditSanPham?id=SP_NON_EXIST
+2. Quan sát hành vi hệ thống",Mã: SP_NON_EXIST,"Hệ thống phát hiện sản phẩm null, tự động chuyển hướng về trang Dashboard quản lý.",Không hiển thị form sửa.,Redirect về Dashboard thành công.,PASS,"Dòng code: `if (sp == null) return RedirectToAction(""Dashboard"")`."
+TC15,Truy cập trực tiếp URL ThemSanPham khi chưa đăng nhập,Kiểm tra bảo mật phân quyền của trang thêm sản phẩm,"1. Chưa đăng nhập tài khoản nào
+2. Nhập URL /Home/ThemSanPham và nhấn Enter",Không có,Hệ thống chặn quyền truy cập trực tiếp và chuyển hướng về trang Đăng nhập /Auth/SignIn.,Giao diện form thêm sản phẩm hiển thị.,Truy cập thành công không bị chặn.,FAIL,Cần thêm đoạn check quyền Admin ở đầu action ThemSanPham trong HomeController.

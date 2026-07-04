@@ -1,0 +1,16 @@
+Your Company LOGO,Project Name: SoccerStore,,Test Designed by:,Hồ Quốc Nam,,,,,
+,Module Name: Khuyến mãi Flash Sale,,Test Designed date:,23/05/2026,,,,,
+,Release Version: 1.0,,Test Executed by:,Hồ Quốc Nam,,,,,
+,,,Test Execution date:,23/05/2026,,,,,
+Pre-condition,- Đang ở giao diện trang Flash Sale (/Home/flashSale).,,,,,,,,
+Test Case#,Test Title/ Scenario,Test Summary,Test Steps,Test Data,Expected Result,Post-condition,Actual Result,Status,Notes
+TC01,Xem danh sách sản phẩm Flash Sale,Kiểm tra hiển thị các sản phẩm giảm giá,"1. Truy cập trang Flash Sale
+2. Quan sát danh sách sản phẩm",Không có,Chỉ hiển thị danh sách các sản phẩm đang có chương trình khuyến mãi hoạt động (MAKM khác null trong CSDL). Các sản phẩm hiển thị đúng giá gốc gạch đi và giá đã giảm nổi bật.,Không,Danh sách sản phẩm flash sale hiển thị đúng.,PASS,
+TC02,Kiểm tra hiển thị giá gốc và giá khuyến mãi,Kiểm tra hiển thị so sánh giá sản phẩm Flash Sale,1. Quan sát thẻ sản phẩm trên trang Flash Sale,Không có,Hiển thị giá gốc bị gạch ngang và giá sau khi giảm in đậm màu đỏ/cam nổi bật.,Không,Giá cả hiển thị đúng cấu hình.,PASS,
+TC03,Hiển thị phần trăm giảm giá của sản phẩm,Kiểm tra nhãn giảm giá của sản phẩm Flash Sale,1. Xem nhãn giảm giá đính trên sản phẩm Flash Sale,Không có,"Mỗi sản phẩm khuyến mãi hiển thị nhãn giảm giá (ví dụ: ""-30%"") ở góc ảnh.",Không,Nhãn hiển thị đầy đủ.,PASS,
+TC04,Thêm sản phẩm Flash Sale vào giỏ hàng,Kiểm tra giá sản phẩm khuyến mãi khi thêm vào giỏ hàng,"1. Nhấp nút ""Thêm vào giỏ hàng"" đối với sản phẩm Flash Sale
+2. Vào trang giỏ hàng kiểm tra giá sản phẩm",Sản phẩm Flash Sale,Sản phẩm được thêm vào giỏ hàng thành công với giá bán bằng giá đã giảm khuyến mãi.,Bản ghi giỏ hàng được tạo.,Giá trong giỏ hàng hiển thị đúng giá đã giảm.,PASS,
+TC05,Click vào sản phẩm Flash Sale để xem chi tiết,Kiểm tra chuyển hướng từ trang Flash Sale,"1. Click vào ảnh/tên sản phẩm trên trang Flash Sale
+2. Quan sát trang chi tiết sản phẩm",Sản phẩm Flash Sale,"Hệ thống chuyển sang trang chi tiết sản phẩm, hiển thị giá khuyến mãi chính xác.",Không,Chuyển hướng thành công.,PASS,
+TC06,Kiểm tra giao diện khi không có sản phẩm Flash Sale nào,Kiểm tra trạng thái trống của trang Flash Sale,"1. Cấu hình CSDL không có sản phẩm nào có mã khuyến mãi (MAKM = null)
+2. Truy cập trang Flash Sale",Không có,"Trang Flash Sale hiển thị danh sách trống, không gây lỗi hệ thống.",Không,Hiển thị bình thường không gây lỗi.,PASS,

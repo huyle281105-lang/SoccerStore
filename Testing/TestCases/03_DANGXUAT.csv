@@ -1,0 +1,18 @@
+Your Company LOGO,Project Name: SoccerStore,,Test Designed by:,Hồ Quốc Nam,,,,,
+,Module Name: Đăng xuất hệ thống,,Test Designed date:,23/05/2026,,,,,
+,Release Version: 1.0,,Test Executed by:,Hồ Quốc Nam,,,,,
+,,,Test Execution date:,23/05/2026,,,,,
+Pre-condition,- Đang đăng nhập tài khoản User hoặc Admin.,,,,,,,,
+Test Case#,Test Title/ Scenario,Test Summary,Test Steps,Test Data,Expected Result,Post-condition,Actual Result,Status,Notes
+TC01,Đăng xuất khỏi hệ thống thành công,Kiểm tra tính năng đăng xuất tài khoản,"1. Nhấp chọn ""Đăng xuất"" từ menu tài khoản ở header (hoặc truy cập trực tiếp /Auth/Logout)",Không có,"Hệ thống hủy session lưu trữ thông tin khách hàng, xóa trạng thái đăng nhập trên giao diện, và chuyển hướng người dùng về trang đăng nhập /Auth/SignIn.",Session bị xóa sạch.,"Đăng xuất thành công, chuyển về trang SignIn.",PASS,
+TC02,Nhấn nút Back trên trình duyệt sau khi đã Đăng xuất,Kiểm tra bảo mật chống quay lại trang cũ khi đã thoát session,"1. Thực hiện Đăng xuất thành công
+2. Nhấn nút Back (mũi tên quay lại) của trình duyệt",Không có,"Người dùng có thể thấy giao diện cũ lưu trong cache trình duyệt, nhưng khi click vào bất kỳ liên kết nội bộ nào (ví dụ: Giỏ hàng, Thanh toán), hệ thống phải yêu cầu Đăng nhập lại.",Không cho phép thực hiện thao tác có xác thực.,Hệ thống yêu cầu đăng nhập khi thực hiện thao tác mới.,PASS,
+TC03,Đăng xuất từ nhiều tab đang mở đồng thời,Kiểm tra tính hủy bỏ session đồng bộ trên các tab,"1. Mở 3 tab cùng đang ở trạng thái đăng nhập
+2. Ở tab 1 click nút ""Đăng xuất""
+3. Ở tab 2 và tab 3 thực hiện tải lại trang (F5)",Không có,"Cả 3 tab đều chuyển về trạng thái chưa đăng nhập, hiển thị nút Đăng nhập / Đăng ký.",Session bị hủy hoàn toàn trên máy chủ.,Hủy session đồng bộ thành công.,PASS,
+TC04,Truy cập trực tiếp URL trang Giỏ hàng sau khi đăng xuất,Kiểm tra phân quyền truy cập trang giỏ hàng,"1. Đăng xuất thành công
+2. Nhập URL /Cart/Index vào thanh địa chỉ trình duyệt và nhấn Enter",Không có,"Hệ thống kiểm tra chưa đăng nhập, chặn truy cập và chuyển hướng về trang Đăng nhập.",Không truy cập được.,Chuyển hướng về trang Đăng nhập.,PASS,
+TC05,Truy cập trực tiếp URL trang Thanh toán sau khi đăng xuất,Kiểm tra phân quyền truy cập trang thanh toán,"1. Đăng xuất thành công
+2. Nhập URL /Order/ThanhToan vào thanh địa chỉ trình duyệt và nhấn Enter",Không có,Hệ thống chặn truy cập và chuyển hướng về trang Đăng nhập.,Không tạo đơn hàng.,Chuyển hướng về trang Đăng nhập.,PASS,
+TC06,Truy cập trực tiếp URL trang Dashboard sau khi đăng xuất,Kiểm tra phân quyền truy cập trang Dashboard Admin,"1. Đăng xuất thành công
+2. Nhập URL /Home/Dashboard và nhấn Enter",Không có,Hệ thống chặn truy cập và chuyển hướng về trang Đăng nhập.,Không xem được Dashboard.,Chuyển hướng về trang Đăng nhập.,PASS,

@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "PhuKien";
+    Layout = "~/Views/Shared/_LayoutKhachHang.cshtml";
+}
+@using ShopBanGiay_Nhom13.Models;
+@model List<SANPHAM>
+
+<div class="container">
+    <div class="row">
+        @foreach (SANPHAM sp in Model)
+        {
+            <div class="col-4">
+                <div class="card card-item border-1">
+                    <img class="card-img" src="~/Content/Images/@sp.HINHANH" />
+                    <div class="card-body">
+                        <p style="height: 100px;">@sp.TENSP</p>
+                        <p class="text-danger">@sp.GIA ₫</p>
+                        <div class="text-end">
+                            <a class="text-decoration-none btn btn-secondary" href="#">Xem chi tiết</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

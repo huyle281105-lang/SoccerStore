@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9af4c83c59184940be226e17626ffac6" Name="Diagram1">
+        <EntityTypeShape EntityType="SOCCERSTOREModel.CHITIETHOADON" Width="1.5" PointX="5.25" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SOCCERSTOREModel.GIOHANG" Width="1.5" PointX="5.25" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SOCCERSTOREModel.HOADON" Width="1.5" PointX="3" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SOCCERSTOREModel.HOADON_TRANGTHAI" Width="1.5" PointX="5.25" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SOCCERSTOREModel.KHACHHANG" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SOCCERSTOREModel.KHACHHANG_VAITRO" Width="1.5" PointX="5.25" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SOCCERSTOREModel.KHUYENMAI" Width="1.5" PointX="0.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SOCCERSTOREModel.LOAISP" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SOCCERSTOREModel.NHATKY_TONKHO" Width="1.5" PointX="8.25" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SOCCERSTOREModel.PHUONGTHUC_THANHTOAN" Width="1.5" PointX="6" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SOCCERSTOREModel.SANPHAM" Width="1.5" PointX="3" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SOCCERSTOREModel.SANPHAM_SIZE" Width="1.5" PointX="5.25" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SOCCERSTOREModel.SANPHAMNOIBAT" Width="1.5" PointX="5.25" PointY="20.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SOCCERSTOREModel.SIZE" Width="1.5" PointX="3" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SOCCERSTOREModel.THANHTOAN" Width="1.5" PointX="8.25" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SOCCERSTOREModel.THUONGHIEU" Width="1.5" PointX="0.75" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SOCCERSTOREModel.TRANGTHAI_DONHANG" Width="1.5" PointX="3" PointY="23.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SOCCERSTOREModel.VAITRO" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="SOCCERSTOREModel.FK__CHITIETHOA__MAHD__4E88ABD4" ManuallyRouted="false" />
+        <AssociationConnector Association="SOCCERSTOREModel.FK__CHITIETHOA__MASP__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="SOCCERSTOREModel.FK__GIOHANG__MAKH__52593CB8" ManuallyRouted="false" />
+        <AssociationConnector Association="SOCCERSTOREModel.FK__GIOHANG__MASP__534D60F1" ManuallyRouted="false" />
+        <AssociationConnector Association="SOCCERSTOREModel.FK__HOADON__MAKH__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="SOCCERSTOREModel.FK_HOADON_TRANGTHAI_HOADON" ManuallyRouted="false" />
+        <AssociationConnector Association="SOCCERSTOREModel.FK_NHATKY_TONKHO_HOADON" ManuallyRouted="false" />
+        <AssociationConnector Association="SOCCERSTOREModel.FK_THANHTOAN_HOADON" ManuallyRouted="false" />
+        <AssociationConnector Association="SOCCERSTOREModel.FK_HOADON_TRANGTHAI_TRANGTHAI" ManuallyRouted="false" />
+        <AssociationConnector Association="SOCCERSTOREModel.FK_KHACHHANG_VAITRO_KHACHHANG" ManuallyRouted="false" />
+        <AssociationConnector Association="SOCCERSTOREModel.FK_KHACHHANG_VAITRO_VAITRO" ManuallyRouted="false" />
+        <AssociationConnector Association="SOCCERSTOREModel.FK__SANPHAM__MAKM__4222D4EF" ManuallyRouted="false" />
+        <AssociationConnector Association="SOCCERSTOREModel.FK__LOAISP__MAL_CHA__3B75D760" ManuallyRouted="false" />
+        <AssociationConnector Association="SOCCERSTOREModel.FK__SANPHAM__MAL__412EB0B6" ManuallyRouted="false" />
+        <AssociationConnector Association="SOCCERSTOREModel.FK_NHATKY_TONKHO_SANPHAM" ManuallyRouted="false" />
+        <AssociationConnector Association="SOCCERSTOREModel.FK_THANHTOAN_PTTT" ManuallyRouted="false" />
+        <AssociationConnector Association="SOCCERSTOREModel.FK__SANPHAM__MATH__403A8C7D" ManuallyRouted="false" />
+        <AssociationConnector Association="SOCCERSTOREModel.FK__SANPHAM_SI__MASP__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="SOCCERSTOREModel.FK__SANPHAMNOI__MASP__48CFD27E" ManuallyRouted="false" />
+        <AssociationConnector Association="SOCCERSTOREModel.FK__SANPHAM_S__MASIZ__59063A47" ManuallyRouted="false" />
+        <AssociationConnector Association="SOCCERSTOREModel.CHITIETKHUYENMAI" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

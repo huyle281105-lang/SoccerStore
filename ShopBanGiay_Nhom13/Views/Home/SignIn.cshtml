@@ -1,0 +1,62 @@
+﻿@{
+    ViewBag.Title = "Đăng nhập";
+    Layout = "~/Views/Shared/_LayoutKhachHang.cshtml";
+}
+
+<div class="container d-flex justify-content-center align-content-center">
+    <form action="/Auth/SignIn" method="post" class="form-signin bg-success p-5 rounded-4" style="width: 400px;">
+        <h3 class="text-white text-center my-3 mb-5">Đăng nhập</h3>
+        @if (ViewBag.Error != null)
+        {
+            <div class="alert alert-danger text-center my-2" style="font-size: 14px; background-color: #f8d7da; color: #721c24; border-radius: 4px; padding: 8px;">
+                @ViewBag.Error
+            </div>
+        }
+        <div class="mb-2 mt-4">
+            <input class="form-control w-100 d-inline-block" type="text" name="txtName" placeholder="Email" required/>
+        </div>
+
+        <div class="mb-2 mt-4">
+            <input class="form-control w-100 d-inline-block" type="password" name="txtPass" placeholder="Password" required/>
+        </div>
+
+        <div class="text-end">
+            <a class="a-link" href="#">Forgot password</a>
+        </div>
+
+        <div class="text-center my-4">
+            <input class="btn btn-primary w-100" type="submit" value="Đăng nhập" />
+        </div>
+
+        <div class="my-3 text-center ">
+            <span class="text-white frm-label">Not a member? </span><a class="a-link" href="/Auth/SignUp">Register</a>
+        </div>
+    </form>
+</div>
+
+<style>
+    .container {
+    }
+
+        .container .form-signin {
+            border-radius: 30px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            min-height: 77vh;
+            width: 50vh !important;
+        }
+
+    .frm-label {
+        font-size: 16px;
+    }
+
+    .a-link {
+        color: #fcd34d;
+        font-size: 0.9rem;
+        transition: 0.3s;
+    }
+
+        .a-link:hover {
+            color: #a5f3fc;
+            text-decoration: underline;
+        }
+</style>

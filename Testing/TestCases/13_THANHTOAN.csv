@@ -1,0 +1,53 @@
+Your Company LOGO,Project Name: SoccerStore,,Test Designed by:,Hồ Quốc Nam,,,,,
+,Module Name: Thanh toán đơn hàng,,Test Designed date:,23/05/2026,,,,,
+,Release Version: 1.0,,Test Executed by:,Hồ Quốc Nam,,,,,
+,,,Test Execution date:,23/05/2026,,,,,
+Pre-condition,"- Người dùng đã đăng nhập tài khoản User.
+- Giỏ hàng đã có ít nhất một sản phẩm.",,,,,,,,
+Test Case#,Test Title/ Scenario,Test Summary,Test Steps,Test Data,Expected Result,Post-condition,Actual Result,Status,Notes
+TC01,Truy cập trang thanh toán thành công,Kiểm tra điều hướng sang trang thanh toán khi giỏ hàng có sản phẩm,"1. Từ trang Giỏ hàng, nhấp chọn nút ""Thanh toán""",Không có,"Hệ thống chuyển hướng sang trang thanh toán /Order/ThanhToan, hiển thị form thông tin giao hàng và danh sách sản phẩm cùng tổng tiền.",Không,Chuyển hướng sang trang thanh toán thành công.,PASS,
+TC02,Truy cập trang thanh toán thất bại khi giỏ hàng trống,Kiểm tra chặn thanh toán khi giỏ hàng không có sản phẩm,"1. Đảm bảo giỏ hàng trống
+2. Truy cập trực tiếp địa chỉ URL /Order/ThanhToan",Không có,"Hệ thống kiểm tra giỏ hàng trống, gán thông báo lỗi ""Giỏ hàng trống."" vào TempData và chuyển hướng người dùng về trang Giỏ hàng /Cart/Index.",Không tạo đơn hàng.,Bị chuyển hướng về trang Giỏ hàng kèm báo lỗi.,PASS,
+TC03,Đặt hàng thành công hình thức COD,Kiểm tra đặt hàng thành công khi đầy đủ thông tin giao hàng và đủ tồn kho,"1. Vào trang thanh toán
+2. Nhập Người nhận, Số điện thoại, Địa chỉ giao hàng, Ngày hẹn giao
+3. Chọn phương thức COD
+4. Nhấn nút ""Đặt hàng và thanh toán""","Người nhận: Hồ Quốc Nam
+SĐT: 0909123456
+Địa chỉ: 123 Thái Hà, Đống Đa, Hà Nội
+Ngày hẹn giao: 26/05/2026
+Ghi chú: Gọi điện trước khi giao","Hệ thống tạo hóa đơn HOADON mới với mã tự động HDxxx, tạo chi tiết hóa đơn CHITIETHOADON, trừ số lượng sản phẩm trong kho, dọn sạch giỏ hàng và chuyển hướng về trang /Order/DatHanhThanhCong?id=HDxxx.","Hóa đơn được lưu, số lượng tồn kho sản phẩm bị giảm.","Đặt hàng thành công, hiển thị trang hoàn thành đơn hàng.",PASS,
+TC04,Đặt hàng thất bại do sản phẩm vượt quá tồn kho,Kiểm tra chặn thanh toán khi tồn kho sản phẩm nhỏ hơn số lượng trong giỏ,"1. Thêm sản phẩm có số lượng giỏ hàng lớn hơn số lượng tồn kho thực tế (ví dụ: mua 5 nhưng kho còn 2)
+2. Vào trang thanh toán và điền đầy đủ thông tin
+3. Nhấn nút ""Đặt hàng và thanh toán""",Sản phẩm SP001: Mua 5 (Tồn kho thực tế: 2),"Hệ thống kiểm tra tồn kho tại backend, phát hiện thiếu hàng, gán lỗi ""Sản phẩm mã SP001 không đủ tồn kho."" vào TempData, hủy giao dịch và chuyển hướng về trang Giỏ hàng.","Không tạo hóa đơn, không trừ kho, giỏ hàng giữ nguyên.","Hệ thống từ chối đặt hàng, báo lỗi thiếu tồn kho.",PASS,
+TC05,Đặt hàng thất bại do để trống trường Người nhận,Kiểm tra validation thiếu trường Người nhận,"1. Vào trang thanh toán
+2. Nhập đầy đủ thông tin, để trống trường Người nhận
+3. Nhấn nút đặt hàng","Người nhận: (Trống)
+SĐT: 0909123456
+Địa chỉ: 123 Thái Hà","Trình duyệt chặn submit, hiển thị tooltip yêu cầu nhập thông tin trường còn trống.",Không tạo đơn hàng.,Trình duyệt chặn submit và hiển thị tooltip thông báo lỗi của HTML5.,PASS,
+TC06,Đặt hàng thất bại do để trống trường Địa chỉ,Kiểm tra validation các trường thông tin giao nhận,"1. Bỏ trống ô Địa chỉ
+2. Nhấn ""Đặt hàng và thanh toán""","Địa chỉ: (Trống)
+Người nhận: Hồ Quốc Nam
+SĐT: 0909123456","Trình duyệt chặn submit, hiển thị tooltip yêu cầu nhập thông tin trường còn trống.",Không tạo đơn hàng.,Trình duyệt chặn submit và hiển thị tooltip thông báo lỗi của HTML5.,PASS,
+TC07,Đặt hàng thất bại do để trống trường Số điện thoại,Kiểm tra validation thiếu trường Số điện thoại,"1. Bỏ trống ô Số điện thoại
+2. Điền đầy đủ thông tin khác và nhấn đặt hàng","SĐT: (Trống)
+Người nhận: Hồ Quốc Nam
+Địa chỉ: 123 Thái Hà","Trình duyệt chặn submit, hiển thị tooltip yêu cầu nhập thông tin trường còn trống.",Không tạo đơn hàng.,Trình duyệt chặn submit và hiển thị tooltip thông báo lỗi của HTML5.,PASS,
+TC08,Đặt hàng thất bại do số điện thoại không đúng định dạng,Kiểm tra tính hợp lệ số điện thoại khi đặt hàng,"1. Nhập số điện thoại chứa chữ cái hoặc ký tự đặc biệt
+2. Điền đủ thông tin giao hàng khác và nhấn đặt hàng","SĐT: 0909abc123
+Người nhận: Hồ Quốc Nam
+Địa chỉ: 123 Thái Hà","Hệ thống từ chối đặt hàng, hiển thị thông báo lỗi định dạng Số điện thoại không hợp lệ.",Không tạo đơn hàng.,Đặt hàng thành công và tạo hóa đơn bình thường (Hệ thống không validate định dạng SĐT khi thanh toán).,FAIL,Cần bổ sung kiểm tra định dạng Số điện thoại ở backend hoặc dùng regex ở HTML5.
+TC09,Đặt hàng với ngày hẹn giao ở quá khứ,Kiểm tra logic nghiệp vụ thời gian giao nhận,"1. Chọn Ngày hẹn giao là ngày hôm qua
+2. Điền đủ thông tin giao hàng khác và nhấn đặt hàng",Ngày hẹn giao: 22/05/2026 (Quá khứ so với thời gian hiện tại 23/05/2026),"Hệ thống từ chối đặt hàng, hiển thị thông báo lỗi yêu cầu ngày hẹn giao phải từ ngày hiện tại trở đi.",Hóa đơn được lưu thành công trong DB với ngày hẹn giao trong quá khứ.,Đặt hàng thành công với ngày hẹn giao trong quá khứ.,FAIL,Logic nghiệp vụ bị lỗi: Cần validate ngày hẹn giao >= ngày hiện tại.
+TC10,Đặt hàng với ngày hẹn giao để trống,Kiểm tra gán giá trị mặc định cho ngày hẹn giao,"1. Để trống trường Ngày hẹn giao
+2. Điền đầy đủ các thông tin khác hợp lệ
+3. Nhấn nút ""Đặt hàng và thanh toán""",Ngày hẹn giao: (Trống),"Trình duyệt chặn submit, hiển thị tooltip yêu cầu nhập thông tin trường còn trống.",Hóa đơn được lưu với Ngày hẹn giao = hiện tại + 3 ngày.,Trình duyệt chặn submit và hiển thị tooltip thông báo lỗi của HTML5.,PASS,Dòng code: `NGAYHENGIAO = NgayHenGiao ?? DateTime.Now.AddDays(3)`.
+TC11,"Click ""Quay lại Giỏ hàng"" từ trang thanh toán",Kiểm tra nút quay lại giỏ hàng hoạt động chính xác,"1. Tại trang thanh toán, nhấn nút ""Quay lại Giỏ hàng""",Không có,Hệ thống quay lại trang Giỏ hàng /Cart/Index và bảo toàn danh sách sản phẩm trong giỏ hàng.,Giỏ hàng giữ nguyên.,Quay lại trang Giỏ hàng thành công.,PASS,
+TC12,Kiểm tra tính tổng giá trị hóa đơn chính xác,Kiểm tra xem tổng số tiền cần thanh toán có khớp với tổng giá trị của tất cả các dòng sản phẩm trong đơn hàng không,"1. Thêm nhiều sản phẩm khác nhau vào giỏ hàng
+2. Vào trang thanh toán và kiểm tra tổng tiền ""Tổng cộng""","SP001 (SL 2 x 650,000 = 1,300,000 VNĐ)
+SP002 (SL 1 x 400,000 = 400,000 VNĐ)","Tổng tiền hiển thị ở ""Tạm tính"" và ""Tổng cộng"" phải là 1,700,000 VNĐ (Tổng = Sum(Số lượng x Giá)).",Không,"Tổng tiền hiển thị đúng 1,700,000 VNĐ.",PASS,
+TC13,Đặt hàng khi thông tin ghi chú cực dài,Kiểm tra độ chịu tải của trường Ghi chú đơn hàng,"1. Nhập thông tin ghi chú dài khoảng 500 ký tự
+2. Nhấn đặt hàng",Ghi chú dài 500 ký tự,"Đặt hàng thành công, thông tin ghi chú dài được lưu trữ trọn vẹn vào DB bảng HOADON cột GHICHU.",Hóa đơn được lưu với ghi chú đầy đủ.,Đặt hàng thành công.,PASS,
+TC14,Double-click liên tục nút Đặt hàng,Kiểm tra chống spam gửi đơn hàng tạo trùng lặp,"1. Điền đủ thông tin giao hàng
+2. Double-click nhanh liên tiếp nút đặt hàng",Thông tin hợp lệ,"Hệ thống xử lý nhanh, chỉ lưu duy nhất 1 hóa đơn, không tạo các hóa đơn thừa do click trùng.",Duy nhất 1 hóa đơn được lưu vào DB.,Chỉ tạo 1 hóa đơn.,PASS,
+TC15,Giỏ hàng bị xóa sạch sau khi đặt hàng thành công,Kiểm tra xóa giỏ hàng khi hoàn thành đơn,"1. Thực hiện đặt hàng thành công
+2. Quay lại trang Giỏ hàng xem thông tin",Không có,"Giỏ hàng hiển thị trống, không còn sản phẩm cũ nữa.",Bảng GIOHANG bị xóa sạch bản ghi của khách hàng này.,Giỏ hàng trống hoàn toàn.,PASS,Dòng code: `csdl.GIOHANGs.Remove(item)` trong vòng lặp đặt hàng.

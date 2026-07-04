@@ -1,0 +1,280 @@
+﻿@model IEnumerable<ShopBanGiay_Nhom13.Models.SANPHAM>
+
+@{
+    ViewBag.Title = "Product Dashboard";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<style>
+    .dashboard-header {
+        background: linear-gradient(90deg, #007bff 0%, #6610f2 100%);
+        color: #fff;
+        padding: 18px 25px;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    }
+
+    .table-dark th {
+        background-color: #11161c !important;
+        color: #00d1b2;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+    .table-dark td {
+        color: #e4e4e4;
+    }
+
+    .product-thumb {
+        width: 70px;
+        height: 70px;
+        object-fit: cover;
+        border-radius: 10px;
+        border: 1px solid #333;
+        transition: 0.3s;
+    }
+
+        .product-thumb:hover {
+            transform: scale(1.1);
+            border-color: #0dcaf0;
+        }
+
+    .btn-edit {
+        background-color: #0dcaf0;
+        border-radius: 8px;
+        font-weight: 600;
+        color: black;
+    }
+
+    .btn-delete {
+        background-color: #dc3545;
+        border-radius: 8px;
+        font-weight: 600;
+    }
+
+    .search-box, .sort-select {
+        background-color: #212529;
+        color: #fff;
+        border: 1px solid #555;
+        border-radius: 8px;
+    }
+
+    .pagination button.active {
+        background-color: #0dcaf0;
+        color: black;
+        font-weight: bold;
+    }
+</style>
+
+
+<div class="container-fluid mt-4">
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success text-center mt-3">@TempData["Success"]</div>
+    }
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger text-center mt-3">@TempData["Error"]</div>
+    }
+
+    <div class="dashboard-header d-flex justify-content-between align-items-center mb-4">
+        <h3><i class="fa-solid fa-boxes-stacked me-2"></i>QUẢN LÝ SẢN PHẨM</h3>
+
+        <div class="d-flex align-items-center">
+
+            <input type="text" id="searchBox" class="form-control me-2 search-box"
+                   placeholder="Tìm sản phẩm..." onkeyup="filterProducts()" />
+
+            <select id="sortSelect" class="sort-select me-3" onchange="applySort()">
+                <option value="" disabled selected>Sắp xếp theo...</option>
+                <option value="masp">Mã sản phẩm (A → Z)</option>
+                <option value="tensp">Tên sản phẩm (A → Z)</option>
+                <option value="giaAsc">Giá tăng dần</option>
+                <option value="giaDesc">Giá giảm dần</option>
+            </select>
+
+            <a href="@Url.Action("ThemSanPham", "Home")" class="btn btn-primary fw-bold">
+                <i class="fa-solid fa-plus"></i> Thêm sản phẩm
+            </a>
+        </div>
+    </div>
+
+    <div class="card bg-dark border-secondary text-light shadow-lg rounded-3">
+        <div class="card-body">
+
+            <table class="table table-dark table-striped text-center" id="productTable">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Mã SP</th>
+                        <th>Tên sản phẩm</th>
+                        <th>Hình ảnh</th>
+                        <th>Số lượng</th>
+                        <th>Giá (₫)</th>
+                        <th>Hành động</th>
+                    </tr>
+                </thead>
+
+                <tbody id="tableBody">
+
+                    @if (Model != null && Model.Any())
+                    {
+                        int index = 1;
+                        foreach (var item in Model)
+                        {
+                            <tr class="product-row"
+                                data-masp="@item.MASP"
+                                data-name="@item.TENSP"
+                                data-price="@item.GIA">
+
+                                <td>@index</td>
+                                <td>@item.MASP</td>
+                                <td>@item.TENSP</td>
+
+                                <td>
+                                    <img src="~/Content/Images/@item.HINHANH"
+                                         class="product-thumb" alt="@item.TENSP" />
+                                </td>
+
+                                <td>@item.SOLUONG</td>
+
+                                <td class="text-warning fw-bold">
+                                    @string.Format("{0:N0}", item.GIA)
+                                </td>
+
+                                <td>
+                                    <div class="d-flex justify-content-center">
+                                        <a href="@Url.Action("EditSanPham", "Home", new { id = item.MASP })"
+                                           class="btn btn-edit me-2">
+                                            <i class="fa-solid fa-pen-to-square me-1"></i> Sửa
+                                        </a>
+
+                                        @using (Html.BeginForm("Delete", "Home", FormMethod.Post))
+                                        {
+                                            @Html.Hidden("id", item.MASP)
+
+                                            <button type="submit"
+                                                    class="btn btn-delete"
+                                                    onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này không?')">
+                                                <i class="fa-solid fa-trash-can me-1"></i> Xóa
+                                            </button>
+                                        }
+                                    </div>
+                                </td>
+                            </tr>
+                            index++;
+                        }
+                    }
+                    else
+                    {
+                        <tr><td colspan="7" class="text-center text-muted">Không có sản phẩm nào</td></tr>
+                    }
+
+                </tbody>
+            </table>
+
+            <div class="pagination" id="pagination"></div>
+
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    <script>
+        const rowsPerPage = 10;
+     let currentPage = 1;
+
+      function displayTablePage(page) {
+          const rows = document.querySelectorAll(".product-row");
+            const visibleRows = Array.from(rows).filter(r => !r.classList.contains('filtered-hidden'));
+      const totalPages = Math.ceil(visibleRows.length / rowsPerPage);
+
+   currentPage = page;
+
+    visibleRows.forEach(r => r.style.display = "none");
+
+       visibleRows.forEach((r, i) => {
+     if (i >= (page - 1) * rowsPerPage && i < page * rowsPerPage) {
+      r.style.display = "";
+ }
+       });
+
+   const pagination = document.getElementById("pagination");
+            pagination.innerHTML = "";
+
+            if (visibleRows.length === 0 || totalPages <= 1) return;
+
+            const btn = (label, pg, disabled = false) => {
+     let b = document.createElement("button");
+       b.className = "btn btn-sm btn-secondary mx-1";
+         b.innerText = label;
+    if (disabled) {
+b.classList.add("disabled");
+         b.disabled = true;
+              }
+     if (pg === currentPage) b.classList.add("active");
+                b.onclick = () => !disabled && displayTablePage(pg);
+       pagination.appendChild(b);
+       };
+
+     btn("«", Math.max(1, page - 1), page === 1);
+
+            for (let i = 1; i <= totalPages; i++) btn(i, i);
+
+ btn("»", Math.min(totalPages, page + 1), page === totalPages);
+        }
+
+        function filterProducts() {
+            const keyword = document.getElementById("searchBox").value.toLowerCase();
+            const rows = document.querySelectorAll(".product-row");
+
+ rows.forEach(r => {
+     const name = r.getAttribute("data-name").toLowerCase();
+         const masp = r.getAttribute("data-masp").toLowerCase();
+     const show = name.includes(keyword) || masp.includes(keyword);
+
+    if (show) {
+r.classList.remove("filtered-hidden");
+        } else {
+             r.classList.add("filtered-hidden");
+      r.style.display = "none";
+        }
+     });
+
+      displayTablePage(1);
+        }
+
+        function applySort() {
+  const type = document.getElementById("sortSelect").value;
+ const rows = Array.from(document.querySelectorAll(".product-row"));
+            const table = document.querySelector("#tableBody");
+
+     if (type === "masp" || type === "tensp") {
+rows.sort((a, b) =>
+  a.getAttribute(type === "masp" ? "data-masp" : "data-name")
+ .localeCompare(
+      b.getAttribute(type === "masp" ? "data-masp" : "data-name"),
+        "vi"
+        )
+         );
+         }
+        else if (type === "giaAsc" || type === "giaDesc") {
+         rows.sort((a, b) =>
+           type === "giaAsc"
+   ? a.getAttribute("data-price") - b.getAttribute("data-price")
+     : b.getAttribute("data-price") - a.getAttribute("data-price")
+         );
+   }
+
+            table.innerHTML = "";
+            rows.forEach(r => table.appendChild(r));
+
+            displayTablePage(1);
+}
+
+        window.onload = () => displayTablePage(1);
+    </script>
+}

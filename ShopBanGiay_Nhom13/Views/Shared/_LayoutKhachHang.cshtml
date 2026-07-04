@@ -1,0 +1,236 @@
+@using ShopBanGiay_Nhom13.Models;
+
+@{
+    List<LOAISP> dsl = ViewBag.lsp as List<LOAISP>;
+    List<THUONGHIEU> dsthuonghieu = ViewBag.thuonghieu as List<THUONGHIEU>;
+    var kh = (Session["KHACHHANG"] ?? Session["KHACHHANGs"]) as KHACHHANG;
+}
+
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="~/Content/bootstrap-5.0.2-dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/layout-khachhang.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <header>
+        <div class="container-fluid">
+            <div class="row my-3 header">
+                <div class="col-1 logo-header">
+                    <a href="#"><img class="w-75 my-1 mx-5" src="~/Content/Images/logo.jpg" /></a>
+                </div>
+
+                <div class="col-7 search-header">
+                    <form class="d-flex align-items-center justify-content-center" action="/Home/SearchProducts">
+                        <div class="input-group w-75">
+                            <input type="text" class="form-control" placeholder="Tìm kiếm sản phẩm..." aria-label="Search" name="Search">
+                            <button class="btn btn-outline-light bg-secondary" type="submit">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="col-4 Login-form">
+                    <div class="d-flex justify-content-between gap-2">
+                        <div class="w-75">
+                            @if (kh == null)
+                            {
+                                <a class="text-decoration-none text-white btn btn-primary px-3" href="/Auth/SignIn">Sign in</a>
+                                <a class="text-decoration-none text-white btn btn-primary px-3" href="/Auth/SignUp">Sign up</a>
+                            }
+                            else
+                            {
+                        <ul class="nav-lv1-acc">
+                            <li class="nav-item nav-link">
+                                <span class="text-white" style="font-size: 16px;">Xin chào, @kh.TENKH</span>
+
+                                <ul class="nav-lv2-acc">
+                                    @if (kh.ROLES != null && kh.ROLES.Trim().ToLower() == "admin")
+                                    {
+                                        <li class="nav-item nav-link">
+                                            <a class="text-decoration-none text-white btn btn-warning px-3 mb-2" href="/Home/Dashboard">Trang Quản Trị</a>
+                                        </li>
+                                    }
+                                    <li class="nav-item nav-link">
+                                        <a class="text-decoration-none text-white btn btn-danger px-3" href="/Auth/Logout">Đăng xuất</a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                        </ul>
+                            }
+                        </div>
+                        <a class="w-50" href="/Cart/Index">
+                            <i class="header-icon fa-solid fa-cart-shopping text-white"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row p-2 mb-3 header-bottom">
+                <div class="col-12 nav-wrap">
+                    <ul class="nav navbar nav-lv1">
+                        <li class="nav-item">
+                            <a class="home-text text-decoration-none text-white" href="/Home/Index">Trang chủ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="text-decoration-none text-white " href="#">Giày bóng đá <i class="angle-down fa-solid fa-angle-down text-white"></i></a>
+                            <ul class="nav navbar nav-lv2">
+                                <li class="nav-item nav-link p-2 px-3">
+                                    <a class="text-decoration-none text-white" href="@Url.Action("Giay", "Home")">Tất cả sản phẩm</a>
+                                </li>
+                                @foreach (LOAISP lsp in dsl)
+                                {
+                                    if (lsp.MAL_CHA == null && lsp.TENL != "Phụ kiện")
+                                    {
+                                        <li class="nav-item nav-link p-2 px-3">
+                                            <a class="text-decoration-none text-white" href="/Home/LocSanPham/?MAL=@lsp.MAL">@lsp.TENL</a>
+                                        </li>
+                                    }
+                                }
+                            </ul>
+
+                        </li>
+                        <li class="nav-item">
+                            <a class="text-decoration-none text-white" href="#">Thương hiệu <i class="angle-down fa-solid fa-angle-down text-white"></i></a>
+                            <ul class="nav navbar nav-lv2">
+                                @foreach (THUONGHIEU th in dsthuonghieu)
+                                {
+                                    <li class="nav-item nav-link p-2 px-3">
+                                        <a class="text-decoration-none text-white" href="/Home/ThuongHieu/?math=@th.MATH">@th.TENTH</a>
+                                    </li>
+                                }
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="text-decoration-none text-white" href="#">Phụ kiện <i class="angle-down fa-solid fa-angle-down text-white"></i></a>
+                            <ul class="nav navbar nav-lv2">
+                                <li class="nav-item nav-link p-2 px-3">
+                                    <a class="text-decoration-none text-white" href="@Url.Action("PhuKien", "Home")">Tất cả phụ kiện</a>
+                                </li>
+                                @foreach (LOAISP lsp in dsl)
+                                {
+                                    if (lsp.MAL_CHA != null && lsp.TENL != "Phụ kiện")
+                                    {
+                                        <li class="nav-item nav-link p-2 px-3">
+                                            <a class="text-decoration-none text-white" href="/Home/LocSanPham/?MAL=@lsp.MAL">@lsp.TENL</a>
+                                        </li>
+                                    }
+                                }
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="text-decoration-none text-white" href="#">Dịch vụ <i class="angle-down fa-solid fa-angle-down text-white"></i></a>
+                            <ul class="nav navbar nav-lv2">
+                                <li class="nav-item nav-link p-2 px-3">
+                                    <a class="text-decoration-none text-white" href="/Home/InAnQuanAo">In ấn quần áo đội</a>
+                                </li>
+                                <li class="nav-item nav-link p-2 px-3">
+                                    <a class="text-decoration-none text-white" href="/Home/ThanhLyVaKyGui">Thanh lý & Ký gửi</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="text-decoration-none text-white fl-sale" href="/Home/flashSale">Flash sale</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="text-decoration-none text-white" href="#">Hướng dẫn <i class="angle-down fa-solid fa-angle-down text-white"></i></a>
+                            <ul class="nav navbar nav-lv2">
+                                <li class="nav-item nav-link p-2 px-3">
+                                    <a class="text-decoration-none text-white" href="/Home/HuongDanMuaHang">Hướng dẫn mua hàng</a>
+                                </li>
+                                <li class="nav-item nav-link p-2 px-3">
+                                    <a class="text-decoration-none text-white" href="/Home/ChinhSachDoiTra">Chính sách đổi trả</a>
+                                </li>
+                                <li class="nav-item nav-link p-2 px-3">
+                                    <a class="text-decoration-none text-white" href="/Home/ChinhSachBaoHanh">Chính sách bảo hành</a>
+                                </li>
+                                <li class="nav-item nav-link p-2 px-3">
+                                    <a class="text-decoration-none text-white" href="/Home/ChinhSachBaoMat">Chính sách bảo mật thông tin</a>
+                                </li>
+                                <li class="nav-item nav-link p-2 px-3">
+                                    <a class="text-decoration-none text-white" href="/Home/HuongDanChonSize">Hướng dẫn chọn size</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="row my-5">
+                @RenderBody()
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <!-- Footer Top -->
+        <div class="footer-top container">
+            <div class="row">
+                <!-- Cột 1 -->
+                <div class="col-md-4 footer-about">
+                    <img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt="logo" width="50" class="mb-3">
+                    <h5>soccerstore.vn</h5>
+                    <p>Để lại email nhận voucher và những chương trình sales mới nhất và sớm nhất.</p>
+                    <form>
+                        <input class="" type="email" placeholder=" email@example.com" required>
+                        <input class="btn btn-sb w-25" type="submit" name="btnSubmitEmail" value="✈" />
+                    </form>
+                </div>
+
+                <!-- Cột 2 -->
+                <div class="col-md-5 footer-store">
+                    <h5 class="mb-3 text-white">Hệ thống cửa hàng</h5>
+                    <p><strong>Store #1 – Đống Đa</strong><br>Số 2 ngõ 121 Thái Hà, Đống Đa, Hà Nội</p>
+                    <p><strong>Store #2 – Hà Đông</strong><br>Số 14-LK25 (đối diện 86) Lê Lai, Hà Đông, Hà Nội</p>
+                    <p><strong>Store #3 – Cầu Giấy</strong><br>Số 22 ngõ 30 Trần Quý Kiên, Cầu Giấy, HN</p>
+                    <p><strong>Store #4 – Hai Bà Trưng</strong><br>Số 189 Chùa Quỳnh, Hai Bà Trưng, Hà Nội</p>
+                    <p><strong>Store #5 – Hải Phòng</strong><br>Số 748 Ngô Gia Tự, Hải An, Hải Phòng – <strong>Hotline: 0799.622.999</strong></p>
+                </div>
+
+                <!-- Cột 3 -->
+                <div class="col-md-3 footer-links">
+                    <h5 class="mb-3 text-white">Link Hướng Dẫn</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Hướng dẫn mua hàng</a></li>
+                        <li><a href="#">Chính sách đổi trả</a></li>
+                        <li><a href="#">Chính sách bảo hành</a></li>
+                        <li><a href="#">Chính sách bảo mật thông tin</a></li>
+                        <li><a href="#">Hướng dẫn chọn size</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Footer Bottom -->
+        <div class="footer-bottom">
+            (c) 2013–2025 – Bản quyền thuộc <a href="#">Soccerstore.vn</a>
+        </div>
+
+        <!-- Social Fixed -->
+        @*<div class="social-fixed">
+                <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Zalo_logo.png" alt="Zalo"></a>
+                <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Facebook_Messenger_4_Logo.svg" alt="Messenger"></a>
+                <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6c/Phone_icon.png" alt="Call"></a>
+                <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/3/3b/Plus_symbol.svg" alt="More"></a>
+            </div>*@
+
+    </footer>
+</body>
+</html>

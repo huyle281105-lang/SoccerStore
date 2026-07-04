@@ -1,0 +1,41 @@
+﻿@model IEnumerable<ShopBanGiay_Nhom13.Models.HOADON>
+@using System.Linq
+
+@{
+    ViewBag.Title = "Hóa đơn";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2 class="text-white mb-4">Danh sách hóa đơn</h2>
+
+<table class="table table-dark table-bordered text-center align-middle">
+    <thead>
+        <tr>
+            <th>Mã HĐ</th>
+            <th>Ngày tạo</th>
+            <th>Ngày hẹn giao</th>
+            <th>Tổng tiền</th>
+            <th>Ngày thanh toán</th>
+            <th>Mã KH</th>  
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var hd in Model)
+        {
+            <tr>
+                <td>@hd.MAHD</td>
+
+                <td>@(hd.NGAYTAO == null ? "" : hd.NGAYTAO.Value.ToString("yyyy-MM-dd"))</td>
+
+                <td>@(hd.NGAYHENGIAO == null ? "" : hd.NGAYHENGIAO.Value.ToString("yyyy-MM-dd"))</td>
+
+                <td>@String.Format("{0:N0}", hd.TONGTIEN)</td>
+
+                <td>@(hd.THANHTOANs != null && hd.THANHTOANs.Any() ? hd.THANHTOANs.First().NGAYTAO.ToString("yyyy-MM-dd") : "")</td>
+
+                <td>@hd.MAKH</td>
+            </tr>
+        }
+    </tbody>
+</table>

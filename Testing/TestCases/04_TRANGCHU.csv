@@ -1,0 +1,24 @@
+Your Company LOGO,Project Name: SoccerStore,,Test Designed by:,Hồ Quốc Nam,,,,,
+,Module Name: Giao diện Trang chủ,,Test Designed date:,23/05/2026,,,,,
+,Release Version: 1.0,,Test Executed by:,Hồ Quốc Nam,,,,,
+,,,Test Execution date:,23/05/2026,,,,,
+Pre-condition,- Đang ở trang chủ website (/Home/Index).,,,,,,,,
+Test Case#,Test Title/ Scenario,Test Summary,Test Steps,Test Data,Expected Result,Post-condition,Actual Result,Status,Notes
+TC01,Hiển thị trang chủ đầy đủ các thành phần chính,Kiểm tra các thành phần giao diện trang chủ hiển thị đúng thiết kế,"1. Truy cập trang chủ
+2. Quan sát Banner Slider, Thanh cam kết dịch vụ, danh mục Quan tâm hàng đầu",Không có,"Trang chủ hiển thị đầy đủ hình ảnh banner, các cam kết dịch vụ (5 cửa hàng, Freeship, Đổi trả 15 ngày, Gửi 2 chọn 1, Hỗ trợ 24/7), và đúng font chữ, không bị vỡ giao diện.",Không,Trang chủ hiển thị chuẩn.,PASS,
+TC02,Hiển thị danh sách Sản phẩm nổi bật,Kiểm tra việc hiển thị sản phẩm nổi bật còn hiệu lực,"1. Quan sát khu vực ""Sản phẩm nổi bật"" ở trang chủ",Không có,"Danh sách hiển thị chính xác các sản phẩm nổi bật được cấu hình trong CSDL mà thời gian hiện tại nằm trong khoảng [NGAYBD, NGAYKT].",Không,Sản phẩm nổi bật hiển thị chính xác.,PASS,
+TC03,"Click liên kết ""SHOP NOW"" trên banner trang chủ",Kiểm tra chuyển hướng từ banner trang chủ,"1. Click nút ""SHOP NOW"" trên banner chính trang chủ",Không có,Hệ thống chuyển hướng người dùng sang trang danh sách sản phẩm giày đá bóng /Home/Giay.,Không,Chuyển hướng thành công sang /Home/Giay.,PASS,
+TC04,Nhấp vào logo để quay lại trang chủ,Kiểm tra chức năng logo thương hiệu trên header,"1. Đang ở một trang con bất kỳ (ví dụ: giỏ hàng)
+2. Nhấp vào logo ở header",Không có,Hệ thống chuyển hướng quay trở lại trang chủ /Home/Index.,Không,Quay lại trang chủ thành công.,PASS,
+TC05,Đăng ký nhận tin khuyến mãi ở footer với Email hợp lệ,Kiểm tra chức năng gửi nhận tin ở chân trang,"1. Cuộn xuống footer
+2. Nhập Email hợp lệ vào ô nhận tin và nhấn nút gửi (máy bay)",Email: newsletter@gmail.com,Trang web reload hoặc báo gửi thành công (Thực tế form thực hiện submit lên chính nó).,Không,Gửi thành công.,PASS,
+TC06,Đăng ký nhận tin khuyến mãi ở footer với Email trống,Kiểm tra validation ô nhập email ở chân trang,"1. Để trống ô email ở footer
+2. Nhấn nút gửi (máy bay)",Email: (Trống),Trình duyệt hiển thị cảnh báo yêu cầu nhập trường Email (thuộc tính required).,Không,Trình duyệt chặn không cho gửi form trống.,PASS,
+TC07,Đăng ký nhận tin khuyến mãi ở footer với Email sai định dạng,Kiểm tra validation định dạng email ở chân trang,"1. Nhập email sai định dạng (ví dụ: abc)
+2. Nhấn nút gửi",Email: abc,Trình duyệt chặn và báo lỗi yêu cầu nhập đúng định dạng email.,Không,Trình duyệt chặn không cho gửi.,PASS,
+TC08,Kiểm tra hiển thị đầy đủ các danh mục trên Menu chính,Kiểm tra các liên kết menu điều hướng trên header,"1. Quan sát thanh menu chính trên header
+2. Kiểm tra xem có đủ: Giày bóng đá, Phụ kiện, Flash Sale, Dịch vụ in ấn, Dịch vụ thanh lý",Không có,Hiển thị đầy đủ và có thể click được vào các danh mục tương ứng.,Không,Menu hiển thị đúng và đủ.,PASS,
+TC09,Hover chuột vào danh mục Phụ kiện,Kiểm tra hiển thị menu con (Submenu) khi hover,"1. Di chuột (hover) vào danh mục ""Phụ kiện"" trên menu
+2. Quan sát menu con đổ xuống",Không có,"Menu con hiển thị đầy đủ các loại phụ kiện liên quan (Vớ, Bọc ống đồng, v.v.).",Không,Submenu hiển thị mượt mà.,PASS,
+TC10,Kiểm tra thông tin liên hệ và mạng xã hội ở footer,"Kiểm tra thông tin hotline, fanpage chân trang","1. Cuộn xuống cuối trang
+2. Kiểm tra thông tin địa chỉ cửa hàng, hotline và các nút mạng xã hội",Không có,"Hiển thị chính xác các thông tin liên hệ và các biểu tượng Facebook, Youtube, Instagram.",Không,Thông tin hiển thị chính xác.,PASS,

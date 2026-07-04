@@ -1,0 +1,39 @@
+Your Company LOGO,Project Name: SoccerStore,,Test Designed by:,Hồ Quốc Nam,,,,,
+,Module Name: Phi chức năng & Bảo mật,,Test Designed date:,23/05/2026,,,,,
+,Release Version: 1.0,,Test Executed by:,Hồ Quốc Nam,,,,,
+,,,Test Execution date:,23/05/2026,,,,,
+Pre-condition,"- Hệ thống website đang hoạt động bình thường trên localhost.
+- Có công cụ đo hiệu năng và các trình duyệt Chrome, Edge.",,,,,,,,
+Test Case#,Test Title/ Scenario,Test Summary,Test Steps,Test Data,Expected Result,Post-condition,Actual Result,Status,Notes
+TC01,Kiểm tra thời gian phản hồi API/Trang,Đảm bảo thời gian tải trang danh sách sản phẩm nhanh chóng,"1. Truy cập trang danh sách sản phẩm /Home/Giay
+2. Đo thời gian tải trang và phản hồi từ server",Không có,Thời gian phản hồi và tải trang hoàn tất dưới 3 giây.,Không,Thời gian phản hồi trung bình: 0.8 giây.,PASS,
+TC02,Tương thích trình duyệt Google Chrome,Kiểm tra hiển thị và tính năng trên Chrome,"1. Mở website bằng trình duyệt Google Chrome
+2. Thực hiện các thao tác tìm kiếm, xem sản phẩm, đăng nhập",Chrome bản 120+,"Giao diện hiển thị đúng thiết kế (CSS hoạt động chuẩn), các tương tác click, hover, form submit hoạt động tốt, không có lỗi script.",Không,"Giao diện hiển thị tốt, chức năng chạy ổn định.",PASS,
+TC03,Tương thích trình duyệt Microsoft Edge,Kiểm tra hiển thị và tính năng trên Edge,"1. Mở website bằng trình duyệt Microsoft Edge
+2. Thực hiện các thao tác kiểm tra giao diện và tính năng",Edge bản 120+,"Giao diện hiển thị mượt mà, đúng chuẩn thiết kế, không có lỗi hiển thị.",Không,Hoạt động tốt và tương thích hoàn toàn.,PASS,
+TC04,Bảo mật phân quyền - Chặn truy cập trực tiếp các URL con Admin,Kiểm tra chặn các tài khoản thông thường truy cập thẳng các chức năng quản trị,"1. Sử dụng tài khoản User thường (hoặc chưa đăng nhập)
+2. Truy cập thẳng các link: /Home/Dashboard, /Home/ThemSanPham, /Home/HoaDon",User thường hoặc Khách vãng lai,Hệ thống chặn quyền truy cập trực tiếp của tất cả các tài khoản thông thường (hoặc khách vãng lai) đối với toàn bộ trang quản trị (Dashboard\, ThemSanPham\, EditSanPham\, HoaDon\, NguoiDung) và chuyển hướng về trang Đăng nhập /Auth/SignIn.,Không,"Chặn truy cập thành công ở Dashboard nhưng các trang con như ThemSanPham, EditSanPham vẫn vào được form khi gõ trực tiếp URL (Lỗ hổng bảo mật).",FAIL,Cần bổ sung kiểm tra quyền Admin cho toàn bộ các action quản trị trong HomeController.
+TC05,Bảo mật chống tấn công XSS trên ô tìm kiếm,Kiểm tra xem hệ thống có lọc hoặc encode các mã script độc hại khi tìm kiếm không,"1. Nhập đoạn mã <script>alert(""hack"")</script> vào ô tìm kiếm
+2. Nhấn tìm kiếm và quan sát xem có hộp thoại cảnh báo hiện lên không","Từ khóa: <script>alert(""hack"")</script>","Hệ thống encode đoạn text và hiển thị tìm kiếm một cách an sau dưới dạng chuỗi thuần túy (hoặc hiển thị thông báo lỗi tìm kiếm), không thực thi mã script.",Không,"Không có mã script nào được thực thi, trang web an toàn.",PASS,Razor View Engine của ASP.NET MVC mặc định tự động HTML-encode dữ liệu đầu ra.
+TC06,Xử lý lỗi 404 khi truy cập URL không tồn tại,Kiểm tra cách hệ thống phản hồi khi người dùng gõ sai đường dẫn URL,"1. Nhập một địa chỉ URL không tồn tại (ví dụ: /Home/NonExistPage)
+2. Nhấn Enter",URL: /Home/NonExistPage,Hệ thống hiển thị trang báo lỗi thân thiện (404 Page Not Found) thay vì crash hoặc lộ thông tin máy chủ.,Không,Hiển thị trang lỗi 404 chuẩn của máy chủ IIS.,PASS,
+TC07,Thời gian lưu trữ session đăng nhập,Kiểm tra xem session đăng nhập có được bảo toàn khi mở tab mới không,"1. Đăng nhập vào website
+2. Mở một tab mới trên trình duyệt và truy cập trang chủ website
+3. Quan sát trạng thái đăng nhập ở tab mới",Không có,"Trạng thái đăng nhập được đồng bộ, thanh header ở tab mới vẫn hiển thị ""Xin chào, ..."".",Không,Trạng thái đăng nhập được giữ nguyên.,PASS,
+TC08,Bảo mật chống SQL Injection trên tham số URL chi tiết sản phẩm,Kiểm tra xem tham số masp có an toàn trước tấn công SQL Injection,"1. Nhập URL /Home/ChiTietSanPham?masp=SP001' OR '1'='1
+2. Quan sát phản hồi hệ thống",Tham số URL chứa mã injection,"Hệ thống xử lý an toàn, không trả về sản phẩm sai lệch và không gây lỗi crash database.",Không thay đổi DB.,Hệ thống báo không tìm thấy hoặc chuyển hướng về trang chủ.,PASS,Sử dụng Entity Framework parameterized query ngăn SQL Injection tự động.
+TC09,Kiểm tra mật khẩu lưu trữ trong CSDL có được băm không,Kiểm tra tính an toàn của thông tin tài khoản trong DB,"1. Mở CSDL, truy cập bảng KHACHHANG
+2. Quan sát cột PASSWORD_KH",Xem bảng KHACHHANG,Mật khẩu khách hàng phải được băm bảo mật (ví dụ: BCrypt\, PBKDF2 hoặc SHA256) trước khi lưu vào CSDL\, không được lưu dưới dạng bản rõ.,Mật khẩu lưu bản rõ.,Mật khẩu hiển thị bản rõ.,FAIL,Nên sử dụng thuật toán băm (BCrypt hoặc SHA256) kèm muối (salt) để lưu trữ mật khẩu bảo mật.
+TC10,Tương thích trình duyệt Mozilla Firefox,Kiểm tra hoạt động hiển thị trên trình duyệt Firefox,"1. Mở trang web bằng trình duyệt Mozilla Firefox
+2. Thực hiện xem sản phẩm, thêm vào giỏ hàng",Firefox phiên bản mới,"Giao diện hiển thị chuẩn xác, font chữ đều, các chức năng mua hàng chạy mượt mà.",Không,Hoạt động tốt và tương thích hoàn toàn.,PASS,
+TC11,Kiểm tra hoạt động của trang web khi tắt JavaScript,Kiểm tra xem trang web có hiển thị được khi không có JS không,"1. Tắt JavaScript trên trình duyệt
+2. Tải lại trang chủ và trang danh mục sản phẩm",JavaScript Disabled,"Giao diện HTML/CSS vẫn hiển thị tĩnh bình thường, nhưng các tính năng động (như thêm giỏ hàng Ajax, tìm kiếm nhanh dashboard) bị ngưng hoạt động.",Không,Trang web hiển thị được bố cục tĩnh cơ bản.,PASS,
+TC12,Bảo mật chống tấn công sửa đổi tham số đơn giá giỏ hàng,Kiểm tra xem hệ thống có dùng giá từ DB hay tin tưởng giá gửi lên từ client,"1. Gửi request POST thêm vào giỏ hàng kèm đơn giá sửa đổi thành 0đ
+2. Kiểm tra đơn hàng tạo ra",Giá sửa đổi: 0đ,"Đơn hàng được lưu vẫn tính theo đúng đơn giá lưu trong DB bảng SANPHAM, không bị ảnh hưởng bởi giá trị sửa đổi từ client.",Đơn hàng tính giá từ DB.,Tổng tiền tính chính xác theo giá sản phẩm trong DB.,PASS,"Controller chỉ nhận tham số mã sản phẩm và số lượng, sau đó tìm giá trong DB."
+TC13,Kiểm tra hiệu năng khi cơ sở dữ liệu có lượng lớn sản phẩm,Đảm bảo hệ thống vẫn chạy mượt khi dữ liệu lớn,"1. Chèn thử nghiệm 10,000 dòng sản phẩm vào bảng SANPHAM
+2. Truy cập trang danh mục sản phẩm và đo thời gian tải","10,000 sản phẩm","Thời gian tải trang danh mục dưới 3 giây, truy vấn SQL tối ưu.",Không,Tải trang nhanh không bị treo.,PASS,
+TC14,Kiểm tra giao diện responsive trên thiết bị di động,Đảm bảo bố cục hiển thị đẹp trên điện thoại di động,"1. Sử dụng tính năng Device Mode của trình duyệt để giả lập iPhone/Android
+2. Quan sát menu điều hướng và danh mục sản phẩm",Giả lập iPhone XR,"Thanh menu chuyển sang dạng toggle rút gọn (hamburger menu), các ảnh sản phẩm xếp hàng dọc ngay ngắn, không bị tràn ngang.",Không,Giao diện hiển thị responsive chuẩn.,PASS,
+TC15,Kiểm tra session đăng nhập tự động hết hạn,Kiểm tra thời gian timeout của phiên đăng nhập,"1. Đăng nhập tài khoản khách hàng
+2. Để trình duyệt không tương tác trong 30 phút
+3. Click vào liên kết ""Giỏ hàng""",Không tương tác 30 phút,"Phiên làm việc hết hạn, hệ thống tự động yêu cầu khách hàng đăng nhập lại.",Session bị hủy.,Hệ thống yêu cầu đăng nhập lại thành công.,PASS,

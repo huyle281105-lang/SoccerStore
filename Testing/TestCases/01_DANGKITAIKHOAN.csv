@@ -1,0 +1,89 @@
+Your Company LOGO,Project Name: SoccerStore,,Test Designed by:,Hồ Quốc Nam,,,,,
+,Module Name: Đăng ký tài khoản,,Test Designed date:,23/05/2026,,,,,
+,Release Version: 1.0,,Test Executed by:,Hồ Quốc Nam,,,,,
+,,,Test Execution date:,23/05/2026,,,,,
+Pre-condition,"- Chưa đăng nhập tài khoản nào trên website.
+- Đang ở giao diện trang đăng ký (/Auth/SignUp).",,,,,,,,
+Test Case#,Test Title/ Scenario,Test Summary,Test Steps,Test Data,Expected Result,Post-condition,Actual Result,Status,Notes
+TC01,Đăng ký thành công với thông tin hợp lệ,Đăng ký tài khoản mới với các thông tin hợp lệ,"1. Nhập Email chưa tồn tại trong hệ thống
+2. Nhập số điện thoại hợp lệ
+3. Nhập mật khẩu và xác nhận mật khẩu khớp nhau
+4. Nhấn nút ""Đăng ký""","Email: new_user@gmail.com
+SĐT: 0909123456
+Mật khẩu: 123456
+Xác nhận: 123456","Hệ thống lưu tài khoản mới vào cơ sở dữ liệu với vai trò ""user"", tự động đăng nhập và chuyển hướng về trang chủ /Home/Index, hiển thị ""Xin chào, new_user@gmail.com"".",Tài khoản mới được tạo thành công trong DB (bảng KHACHHANG).,Đăng ký thành công và tự động đăng nhập.,PASS,Hệ thống tự động gán tên hiển thị (TENKH) bằng Email.
+TC02,Đăng ký thất bại do Email đã tồn tại,Đăng ký tài khoản với email đã được sử dụng,"1. Nhập Email đã tồn tại trong cơ sở dữ liệu
+2. Nhập các thông tin khác hợp lệ
+3. Nhấn nút ""Đăng ký""","Email: user@gmail.com (đã tồn tại)
+SĐT: 0909123456
+Mật khẩu: 123456
+Xác nhận: 123456","Đăng ký thất bại. Giao diện hiển thị thông báo lỗi ""Email đã được sử dụng!"". Không tạo tài khoản mới.",Cơ sở dữ liệu không thay đổi.,"Hiển thị lỗi ""Email đã được sử dụng!"".",PASS,
+TC03,Đăng ký thất bại do mật khẩu không trùng khớp,Kiểm tra tính hợp lệ khi Mật khẩu và Xác nhận mật khẩu khác nhau,"1. Nhập Email và SĐT hợp lệ
+2. Nhập Mật khẩu và nhập Xác nhận mật khẩu khác nhau
+3. Nhấn nút ""Đăng ký""","Email: new_user2@gmail.com
+SĐT: 0909123456
+Mật khẩu: 123456
+Xác nhận: 1234567 (khác nhau)","Đăng ký thất bại. Giao diện hiển thị lỗi ""Mật khẩu không trùng khớp!"". Không tạo tài khoản mới.",Cơ sở dữ liệu không thay đổi.,"Hiển thị lỗi ""Mật khẩu không trùng khớp!"".",PASS,
+TC04,Đăng ký thất bại do để trống trường Email,Kiểm tra validation khi bỏ trống trường Email,"1. Để trống trường Email
+2. Nhập SĐT, Mật khẩu, Xác nhận mật khẩu đầy đủ
+3. Nhấn nút ""Đăng ký""","Email: (Trống)
+SĐT: 0909123456
+Mật khẩu: 123456
+Xác nhận: 123456","Hệ thống chặn submit và báo lỗi ""Vui lòng nhập đầy đủ thông tin!"" ở giao diện.",Cơ sở dữ liệu không thay đổi.,Báo lỗi yêu cầu nhập đầy đủ thông tin.,PASS,
+TC05,Đăng ký thất bại do để trống trường Số điện thoại,Kiểm tra validation khi bỏ trống trường Số điện thoại,"1. Nhập Email hợp lệ
+2. Để trống trường SĐT
+3. Nhập Mật khẩu, Xác nhận mật khẩu
+4. Nhấn nút ""Đăng ký""","Email: tester@gmail.com
+SĐT: (Trống)
+Mật khẩu: 123456
+Xác nhận: 123456","Hệ thống chặn submit và báo lỗi ""Vui lòng nhập đầy đủ thông tin!"" ở giao diện.",Cơ sở dữ liệu không thay đổi.,Báo lỗi yêu cầu nhập đầy đủ thông tin.,PASS,
+TC06,Đăng ký thất bại do để trống trường Mật khẩu,Kiểm tra validation khi bỏ trống trường Mật khẩu,"1. Nhập Email, SĐT hợp lệ
+2. Để trống trường Mật khẩu
+3. Nhập Xác nhận mật khẩu
+4. Nhấn nút ""Đăng ký""","Email: tester@gmail.com
+SĐT: 0909123456
+Mật khẩu: (Trống)
+Xác nhận: 123456","Hệ thống chặn submit và báo lỗi ""Vui lòng nhập đầy đủ thông tin!"" ở giao diện.",Cơ sở dữ liệu không thay đổi.,Báo lỗi yêu cầu nhập đầy đủ thông tin.,PASS,
+TC07,Đăng ký thất bại do để trống trường Xác nhận mật khẩu,Kiểm tra validation khi bỏ trống trường Xác nhận mật khẩu,"1. Nhập Email, SĐT, Mật khẩu hợp lệ
+2. Để trống trường Xác nhận mật khẩu
+3. Nhấn nút ""Đăng ký""","Email: tester@gmail.com
+SĐT: 0909123456
+Mật khẩu: 123456
+Xác nhận: (Trống)","Hệ thống chặn submit và báo lỗi ""Vui lòng nhập đầy đủ thông tin!"" ở giao diện.",Cơ sở dữ liệu không thay đổi.,Báo lỗi yêu cầu nhập đầy đủ thông tin.,PASS,
+TC08,Đăng ký thất bại do Email thiếu ký tự @,Kiểm tra tính hợp lệ của định dạng email thiếu @,"1. Nhập email không chứa ký tự ""@""
+2. Nhập các thông tin khác hợp lệ
+3. Nhấn nút ""Đăng ký""","Email: user_invalid_gmail.com
+SĐT: 0909123456
+Mật khẩu: 123456
+Xác nhận: 123456","Hệ thống từ chối đăng ký, báo lỗi định dạng Email không hợp lệ.",Cơ sở dữ liệu không thay đổi.,Đăng ký thành công và tự động đăng nhập (Hệ thống không chặn email thiếu ký tự '@' ở backend và frontend).,FAIL,Lỗi nghiêm trọng: Thiếu validation định dạng Email.
+TC09,Đăng ký thất bại do Email thiếu tên miền,Kiểm tra định dạng email thiếu phần mở rộng,"1. Nhập email dạng ""user@gmail""
+2. Nhập các thông tin khác hợp lệ
+3. Nhấn nút ""Đăng ký""","Email: user@gmail
+SĐT: 0909123456
+Mật khẩu: 123456
+Xác nhận: 123456","Hệ thống từ chối đăng ký, báo lỗi định dạng Email không hợp lệ.",Cơ sở dữ liệu không thay đổi.,Đăng ký thành công và tự động đăng nhập (Hệ thống không chặn email thiếu tên miền mở rộng).,FAIL,Thiếu validation định dạng Email.
+TC10,Đăng ký thất bại do số điện thoại chứa ký tự chữ cái,Kiểm tra định dạng số điện thoại chứa chữ cái,"1. Nhập số điện thoại chứa chữ cái
+2. Nhập các thông tin khác hợp lệ
+3. Nhấn ""Đăng ký""","Email: tester_phone@gmail.com
+SĐT: 0909abc123
+Mật khẩu: 123456
+Xác nhận: 123456","Hệ thống từ chối đăng ký, hiển thị thông báo lỗi định dạng Số điện thoại không hợp lệ.",Tài khoản được tạo thành công trong DB.,Đăng ký thành công và lưu vào CSDL (Hệ thống không chặn số điện thoại chứa chữ cái).,FAIL,Thiếu validation định dạng Số điện thoại.
+TC11,Đăng ký thất bại do số điện thoại chứa ký tự đặc biệt,Kiểm tra định dạng số điện thoại chứa ký tự đặc biệt,"1. Nhập số điện thoại chứa ký tự đặc biệt
+2. Nhập các thông tin khác hợp lệ
+3. Nhấn ""Đăng ký""","Email: tester_spec@gmail.com
+SĐT: 0909#@!123
+Mật khẩu: 123456
+Xác nhận: 123456","Hệ thống từ chối đăng ký, hiển thị thông báo lỗi định dạng Số điện thoại không hợp lệ.",Tài khoản được tạo thành công trong DB.,Đăng ký thành công và lưu vào CSDL (Hệ thống không chặn số điện thoại chứa ký tự đặc biệt).,FAIL,Thiếu validation định dạng Số điện thoại.
+TC12,Đăng ký với Email chứa ký tự viết hoa,Kiểm tra tính không phân biệt hoa thường của Email đăng ký,"1. Đăng ký tài khoản với email có chữ hoa
+2. Đăng ký thành công
+3. Thử đăng ký lại với chính email đó viết thường toàn bộ","Lần 1: Tester_New@gmail.com
+Lần 2: tester_new@gmail.com","Đăng ký lần 2 báo lỗi ""Email đã được sử dụng!"". Hệ thống không cho tạo tài khoản trùng email.",Không tạo tài khoản trùng lặp ở lần 2.,Báo lỗi email đã được sử dụng.,PASS,Entity Framework SQL collation mặc định không phân biệt hoa thường.
+TC13,Đăng ký với mật khẩu chỉ chứa khoảng trắng,Kiểm tra validation khoảng trắng đối với mật khẩu,"1. Nhập Email, SĐT hợp lệ
+2. Nhập Mật khẩu toàn khoảng trắng
+3. Nhấn ""Đăng ký""","Email: whitespace@gmail.com
+SĐT: 0909123456
+Mật khẩu: ""      ""
+Xác nhận: ""      ""","Hệ thống từ chối đăng ký, yêu cầu mật khẩu phải chứa các ký tự hợp lệ.",Tài khoản được lưu vào DB.,Đăng ký thành công và tự động đăng nhập (CSDL lưu mật khẩu toàn khoảng trắng).,FAIL,Cần bổ sung hàm kiểm tra khoảng trắng hoặc độ mạnh mật khẩu.
+TC14,Double-click liên tục vào nút Đăng ký,Kiểm tra phòng ngừa tạo tài khoản trùng lặp do spam click,"1. Điền đầy đủ thông tin hợp lệ
+2. Click liên tục nhiều lần vào nút ""Đăng ký""",Thông tin hợp lệ,"Hệ thống xử lý an toàn, chỉ tạo duy nhất 1 tài khoản, các click sau không tạo thêm tài khoản trùng.",Tạo duy nhất 1 bản ghi trong DB.,Chỉ tạo duy nhất 1 tài khoản.,PASS,
+TC15,Kiểm tra liên kết Đăng nhập ngay trên trang đăng ký,Kiểm tra chuyển hướng từ trang Đăng ký sang Đăng nhập,"1. Nhấp liên kết ""Đăng nhập ngay"" (hoặc Đăng nhập) dưới form đăng ký",Không có,Hệ thống chuyển hướng người dùng sang trang Đăng nhập /Auth/SignIn.,Không thay đổi.,Chuyển hướng thành công sang /Auth/SignIn.,PASS,

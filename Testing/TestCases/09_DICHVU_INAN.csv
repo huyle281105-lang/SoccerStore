@@ -1,0 +1,17 @@
+Your Company LOGO,Project Name: SoccerStore,,Test Designed by:,Hồ Quốc Nam,,,,,
+,Module Name: Dịch vụ In ấn quần áo,,Test Designed date:,23/05/2026,,,,,
+,Release Version: 1.0,,Test Executed by:,Hồ Quốc Nam,,,,,
+,,,Test Execution date:,23/05/2026,,,,,
+Pre-condition,- Đang truy cập trang Dịch vụ In ấn quần áo đội bóng (/Home/InAnQuanAo).,,,,,,,,
+Test Case#,Test Title/ Scenario,Test Summary,Test Steps,Test Data,Expected Result,Post-condition,Actual Result,Status,Notes
+TC01,Xem trang giới thiệu Dịch vụ In ấn,Kiểm tra hiển thị thông tin giới thiệu dịch vụ in ấn quần áo,"1. Truy cập trang In ấn quần áo
+2. Quan sát nội dung trang",Không có,"Trang hiển thị đầy đủ thông tin giới thiệu dịch vụ in ấn quần áo, hình ảnh minh họa, không bị lỗi hiển thị.",Không,Hiển thị bình thường.,PASS,
+TC02,Kiểm tra hiển thị bảng giá dịch vụ in ấn,Kiểm tra bảng giá in ấn quần áo có rõ ràng không,1. Quan sát khu vực bảng giá trên trang in ấn,Không có,"Bảng giá dịch vụ in ấn (in tên, số, logo) hiển thị đầy đủ thông tin chi tiết.",Không,Hiển thị bảng giá rõ ràng.,PASS,
+TC03,Kiểm tra hiển thị các mẫu font chữ và số in,Kiểm tra các hình ảnh mẫu in thiết kế,"1. Cuộn trang đến phần mẫu font chữ in
+2. Quan sát các hình ảnh mẫu",Không có,Hiển thị đầy đủ hình ảnh các mẫu font chữ và số in ấn đẹp mắt.,Không,Mẫu in hiển thị tốt.,PASS,
+TC04,Kiểm tra thông tin hotline liên hệ in ấn,Kiểm tra số hotline trên trang in ấn,"1. Quan sát phần liên hệ trên trang
+2. Đảm bảo hotline hiển thị đúng số của shop",Không có,Hotline hiển thị rõ ràng và có thể click gọi điện (nếu dùng điện thoại).,Không,Thông tin liên hệ hiển thị đầy đủ.,PASS,
+TC05,Kiểm tra giao diện responsive của trang in ấn,Kiểm tra hiển thị trên màn hình nhỏ/di động,"1. Thay đổi kích thước trình duyệt sang dạng di động
+2. Kiểm tra bố cục trang in ấn",Màn hình di động,"Bố cục trang in ấn tự động co giãn, chữ không bị tràn viền, ảnh tự co giãn hợp lý.",Không,Giao diện hiển thị tốt.,PASS,
+TC06,Click liên kết chat tư vấn dịch vụ,Kiểm tra nút chuyển sang Messenger/Zalo tư vấn,"1. Click vào nút ""Liên hệ ngay"" hoặc chat tư vấn trên trang
+2. Quan sát hành vi chuyển hướng",Không có,Hệ thống chuyển tiếp sang trang chat (Zalo/Facebook) của shop thành công.,Không,Chuyển hướng tư vấn thành công.,PASS,

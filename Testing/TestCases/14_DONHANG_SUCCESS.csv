@@ -1,0 +1,20 @@
+Your Company LOGO,Project Name: SoccerStore,,Test Designed by:,Hồ Quốc Nam,,,,,
+,Module Name: Đặt hàng thành công,,Test Designed date:,23/05/2026,,,,,
+Your Company LOGO,Project Name: SoccerStore,,Test Designed by:,Hồ Quốc Nam,,,,,
+,Module Name: Đặt hàng thành công,,Test Designed date:,23/05/2026,,,,,
+,Release Version: 1.0,,Test Executed by:,Hồ Quốc Nam,,,,,
+,,,Test Execution date:,23/05/2026,,,,,
+Pre-condition,- Vừa đặt hàng thành công và hệ thống chuyển hướng sang trang hoàn thành đơn hàng.,,,,,,,,
+Test Case#,Test Title/ Scenario,Test Summary,Test Steps,Test Data,Expected Result,Post-condition,Actual Result,Status,Notes
+TC01,Xem chi tiết đơn hàng đặt thành công,Kiểm tra hiển thị thông tin hóa đơn sau khi đặt hàng thành công,1. Quan sát giao diện trang đặt hàng thành công (/Order/DatHanhThanhCong?id=HDxxx),Mã hóa đơn: HD001 (đã được tạo),"Trang hiển thị đầy đủ thông tin hóa đơn: Mã đơn hàng, Ngày đặt, Người nhận, Địa chỉ, Số điện thoại, danh sách sản phẩm đã mua và tổng số tiền thanh toán.",Không,Hiển thị chính xác chi tiết hóa đơn.,PASS,
+TC02,Sao chép URL đặt hàng thành công mở trên trình duyệt khác,Kiểm tra bảo mật thông tin đơn hàng,"1. Đặt hàng thành công, copy link /Order/DatHanhThanhCong?id=HD001
+2. Mở tab ẩn danh hoặc trình duyệt khác (chưa đăng nhập) và dán link truy cập",Link đơn hàng HD001,Hệ thống yêu cầu đăng nhập và chỉ cho phép chủ sở hữu hóa đơn xem chi tiết đơn hàng (ngăn chặn khách vãng lai truy cập),Hiển thị thông tin đơn hàng bình thường.,Xem thông tin đơn hàng thành công không cần đăng nhập.,FAIL,Nên kiểm tra chủ sở hữu hóa đơn khớp với user đang đăng nhập ở backend trước khi hiển thị.
+TC03,Click nút Quay lại trang chủ,Kiểm tra nút quay về trang chủ từ trang hoàn thành đơn,"1. Tại trang đặt hàng thành công, click nút ""Quay lại trang chủ"" hoặc tương tự
+2. Quan sát chuyển hướng",Không có,Hệ thống chuyển hướng người dùng quay lại trang chủ /Home/Index an toàn.,Không,Quay lại trang chủ thành công.,PASS,
+TC04,Kiểm tra mã hóa đơn tự động tăng,Kiểm tra logic sinh mã hóa đơn tự động tăng liên tiếp,"1. Thực hiện đặt hàng hóa đơn tiếp theo
+2. Quan sát mã hóa đơn sinh ra",Mã cũ: HD005,Mã hóa đơn mới có định dạng HD006 (tiếp theo mã HD005).,Lưu hóa đơn với mã mới.,Mã hóa đơn sinh ra tăng dần đúng thứ tự.,PASS,
+TC05,Truy cập với ID hóa đơn không tồn tại,Kiểm tra xử lý của hệ thống khi nhập ID hóa đơn sai trên URL,"1. Thay đổi tham số id trên URL thành một mã không có trong DB (ví dụ: HD999)
+2. Nhấn Enter",Mã HD: HD999 (Không tồn tại),"Hệ thống kiểm tra hóa đơn không tồn tại, hiển thị thông báo lỗi và redirect về trang chủ.",Không hiển thị đơn hàng.,Redirect về trang chủ thành công.,PASS,
+TC06,Kiểm tra trừ số lượng tồn kho sản phẩm,Kiểm tra cập nhật số lượng tồn kho sau khi đơn hàng tạo thành công,"1. Trước đặt hàng, xem số tồn kho sản phẩm SP001 (ví dụ: 10)
+2. Mua 2 sản phẩm SP001 và đặt hàng thành công
+3. Kiểm tra lại tồn kho sản phẩm SP001",Mua số lượng: 2,Số lượng tồn kho sản phẩm SP001 trong DB giảm đi chính xác là 2 (còn lại 8).,Tồn kho sản phẩm trong DB cập nhật còn 8.,Tồn kho trừ chính xác.,PASS,

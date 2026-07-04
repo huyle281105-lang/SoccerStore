@@ -1,0 +1,220 @@
+﻿﻿@{
+    if (Model.PhanLoai == "PhuKien")
+    {
+        ViewBag.Title = "Phụ Kiện";
+    }
+    else if (Model.PhanLoai == "ThuongHieu")
+    {
+        ViewBag.Title = "Thương Hiệu";
+    }
+    else if (Model.PhanLoai == "TimKiem")
+    {
+        ViewBag.Title = "Kết quả tìm kiếm";
+    }
+    else
+    {
+        ViewBag.Title = "Giày bóng đá";
+    }
+    Layout = "~/Views/Shared/_LayoutKhachHang.cshtml";
+}
+@using PagedList
+@using PagedList.Mvc
+@using ShopBanGiay_Nhom13.Models;
+@model DanhMucViewModel
+
+
+<main>
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+    <div class="container">
+        @*<div class="row p-3 bg-breadcrumb">
+                <div class="flex-row">
+                    <a class="breadcrumb-link text-decoration-none text-white" href="/Home/Index">Trang chủ </a><i class="fa-solid fa-angle-right text-white"></i>
+                    <label class="text-white text-disabled">Tất cả sản phẩm</label>
+                </div>
+            </div>*@
+
+        <div class="row">
+            <div class="col-3 my-4 p-1 sticky-column">
+                <div class="sidebar">
+                    <h5 class="text-white mx-4 mb-4 border-bottom ">Danh mục sản phẩm</h5>
+                    @if (Model.DanhSachLoaiSP != null)
+                    {
+                        foreach (LOAISP lsp in Model.DanhSachLoaiSP)
+                        {
+
+                            if (lsp.TENL != "Phụ kiện" && @ViewBag.math == null)
+                            {
+                                @*--Foreach Lay ten danh muc san pham--*@
+                                <a href="/Home/LocSanPham/?MAL=@lsp.MAL"
+                                   class="text-decoration-none">
+                                    <label class="form-check-label text-white-50 mb-2 mx-4 d-block" style="font-size: 16px; font-weight: 500;">@lsp.TENL</label>
+                                </a>
+                            }
+                            else if (lsp.TENL != "Phụ kiện" && @ViewBag.math != null)
+                            {
+                                <a href = "/Home/LocSanPham/?MAL=@lsp.MAL&math=@ViewBag.math"
+                                    class="text-decoration-none">
+                                    <label class="form-check-label text-white-50 mb-2 mx-4 d-block" style="font-size: 16px; font-weight: 500;">@lsp.TENL</label>
+                                </a>
+                            }
+
+                        }
+                    }
+                </div>
+
+                <div class="sidebar my-4">
+                    <h5 class="text-white mx-4 mb-4 border-bottom">Dòng giày phổ biến</h5>
+                    <a href="#">
+                        <label class="form-check-label text-white-50 my-2">Adidas copa</label>
+                    </a>
+                </div>
+            </div>
+            <div class="col-9">
+                @*<div class="row my-2">
+                        <div class="filter-box d-flex gap-3 mb-3">
+                            <button class="filter-btn flex-fill">Hãng</button>
+                            <button class="filter-btn flex-fill">Giá</button>
+                            <button class="filter-btn flex-fill">Màu Chủ Đạo</button>
+                            <button class="filter-btn flex-fill">Loại Đinh/Mặt Sân</button>
+                            <button class="filter-btn flex-fill">Size</button>
+                        </div>
+                    </div>*@
+                @if (ViewBag.Error != null)
+                {
+                    <div class="alert alert-warning text-dark my-3" role="alert">
+                        <strong>Lỗi:</strong> @ViewBag.Error
+                    </div>
+                }
+                @if (Model.DanhSachSP != null)
+                {
+                    <div class="row my-3">
+                        @foreach (SANPHAM sp in Model.DanhSachSP)
+                        {
+                            <div class="col-4 mb-3">
+                                <div class="card card-product card-item border-1">
+                                    @if (sp.MAKM != null)
+                                    {
+                                        <span class="badge bg-danger position-absolute top-0 start-0 w-25" style="z-index: 100;">-@sp.KHUYENMAI.PHANTRAMGIAM%</span>
+                                        <img class="card-img" src="~/Content/Images/@sp.HINHANH" style="height: 260px;" />
+                                    }
+                                    else { <img class="card-img" src="~/Content/Images/@sp.HINHANH" style="height: 260px;" /> }
+                                <div class="card-body">
+                                    <p style="height: 80px;">@sp.TENSP</p>
+                                    @if (sp.MAKM != null)
+                                    {
+                                        <div class="mb-4">
+                                            <span class="text-danger">@String.Format("{0:N0} ₫", sp.GIA - (sp.GIA * sp.KHUYENMAI.PHANTRAMGIAM / 100))</span>
+                                            <span class="text-muted text-decoration-line-through ms-2">@String.Format("{0:N0} ₫", sp.GIA)</span>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="mb-4">
+                                            <span class="text-danger">@String.Format("{0:N0} ₫", sp.GIA)</span>
+                                        </div>
+                                    }
+                                    @*<p class="text-danger">@String.Format("{0:N0} ₫", sp.GIA)</p>*@
+                                    <div class="text-end">
+                                        <a class="text-decoration-none btn btn-secondary" href="/Home/ChiTietSanPham/?masp=@sp.MASP">Xem chi tiết</a>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</main>
+
+
+
+<style>
+    .bg-breadcrumb {
+        background: #232323;
+    }
+
+    .text-disabled {
+        opacity: 0.3;
+    }
+
+    .form-check-input {
+        background: none;
+        border-color: #808080;
+    }
+
+    .form-check-label:hover {
+        color: #dcdcdc !important;
+    }
+
+    .breadcrumb-link:hover {
+        text-decoration: underline !important;
+        color: red !important;
+    }
+
+    .sticky-column {
+        position: sticky;
+        top: 164px;
+        align-self: flex-start;
+    }
+
+    .sidebar {
+        background-color: #1c1c1c;
+        border-radius: 8px;
+        padding: 20px;
+    }
+
+        .sidebar h5 {
+            padding: 20px 16px;
+        }
+
+    .filter-box {
+        background-color: #1c1c1c;
+        border-radius: 8px;
+        padding: 10px 15px;
+        color: #fff;
+    }
+
+    .filter-btn {
+        background-color: #222;
+        border: none;
+        border-radius: 8px;
+        padding: 10px 20px;
+        color: #bbb;
+        font-weight: 500;
+        transition: all 0.2s;
+    }
+
+        .filter-btn:hover {
+            transform: scale(1.1);
+        }
+
+    .product-card {
+        background-color: #141414;
+        border: 1px solid #222;
+        border-radius: 8px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        height: 100%;
+    }
+
+    .card-body {
+        position: relative;
+        z-index: 2;
+        color: white;
+    }
+
+    .card-item {
+        background: #1a1a1a;
+        border-color: #232323;
+        padding: 8px;
+        z-index: 2;
+    }
+
+    .card-item img {
+        background: #1a1a1a;
+        padding: 8px;
+        z-index: 2;
+    }
+</style>

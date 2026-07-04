@@ -1,0 +1,21 @@
+Your Company LOGO,Project Name: SoccerStore,,Test Designed by:,Hồ Quốc Nam,,,,,
+,Module Name: Hướng dẫn & Chính sách,,Test Designed date:,23/05/2026,,,,,
+,Release Version: 1.0,,Test Executed by:,Hồ Quốc Nam,,,,,
+,,,Test Execution date:,23/05/2026,,,,,
+Pre-condition,- Đang ở trang chủ website.,,,,,,,,
+Test Case#,Test Title/ Scenario,Test Summary,Test Steps,Test Data,Expected Result,Post-condition,Actual Result,Status,Notes
+TC01,Xem trang Hướng dẫn mua hàng,Kiểm tra hiển thị nội dung Hướng dẫn mua hàng,"1. Click link ""Hướng dẫn mua hàng"" ở menu hoặc footer",Không có,"Trang load thành công, hiển thị đầy đủ văn bản hướng dẫn mua hàng.",Không,Hiển thị bình thường.,PASS,
+TC02,Xem trang Hướng dẫn chọn size,Kiểm tra hiển thị nội dung Hướng dẫn chọn size,"1. Click link ""Hướng dẫn chọn size"" ở menu hoặc footer",Không có,"Trang load thành công, hiển thị bảng kích thước size giày tiêu chuẩn.",Không,Hiển thị bảng chọn size.,PASS,
+TC03,Xem trang Chính sách đổi trả,Kiểm tra hiển thị nội dung Chính sách đổi trả,"1. Click link ""Chính sách đổi trả"" ở menu hoặc footer",Không có,"Trang load thành công, hiển thị văn bản chính sách đổi trả sản phẩm.",Không,Hiển thị chính xác chính sách đổi trả.,PASS,
+TC04,Xem trang Chính sách bảo hành,Kiểm tra hiển thị nội dung Chính sách bảo hành,"1. Click link ""Chính sách bảo hành"" ở menu hoặc footer",Không có,"Trang load thành công, hiển thị văn bản chính sách bảo hành giày bóng đá.",Không,Hiển thị chính xác chính sách bảo hành.,PASS,
+TC05,Xem trang Chính sách bảo mật thông tin,Kiểm tra hiển thị nội dung Chính sách bảo mật thông tin,"1. Click link ""Chính sách bảo mật thông tin"" ở menu hoặc footer",Không có,"Trang load thành công, hiển thị nội dung cam kết bảo mật thông tin khách hàng.",Không,Hiển thị chính xác chính sách bảo mật.,PASS,
+TC06,Kiểm tra tất cả liên kết chính sách hoạt động,Kiểm tra các liên kết chính sách ở chân trang có bị lỗi 404 không,"1. Click lần lượt tất cả các liên kết chính sách ở footer
+2. Đảm bảo không có trang nào lỗi 404",Không có,"Tất cả các liên kết đều mở ra nội dung chính sách tương ứng, không bị lỗi.",Không,Tất cả liên kết hoạt động tốt.,PASS,
+TC07,Kiểm tra phông chữ và định dạng văn bản,Kiểm tra tính thẩm mỹ của các trang chính sách,"1. Mở trang chính sách bảo mật
+2. Đánh giá phông chữ, khoảng cách dòng và canh lề",Không có,"Văn bản hiển thị rõ ràng, sử dụng font chữ Calibri/Inter thống nhất, không lỗi tiếng Việt.",Không,Văn bản hiển thị dễ đọc.,PASS,
+TC08,Kiểm tra hình ảnh trong bảng chọn size,Kiểm tra ảnh minh họa bảng size giày,"1. Truy cập trang Hướng dẫn chọn size
+2. Kiểm tra hình ảnh đo chân và bảng size",Không có,"Hình ảnh hiển thị sắc nét, không bị vỡ hoặc mất link ảnh.",Không,Hình ảnh hiển thị đúng.,PASS,
+TC09,Kiểm tra tốc độ tải các trang chính sách,Kiểm tra hiệu năng tải trang chính sách tĩnh,"1. Nhấp vào trang chính sách đổi trả
+2. Đo thời gian tải trang",Không có,Trang tải hoàn tất tức thì (dưới 1 giây) do chỉ chứa dữ liệu văn bản tĩnh.,Không,Tải trang nhanh dưới 0.5 giây.,PASS,
+TC10,Xem trang chính sách khi chưa đăng nhập và đã đăng nhập,Kiểm tra phân quyền trang chính sách tĩnh,"1. Chưa đăng nhập -> vào các trang chính sách
+2. Đăng nhập User -> vào các trang chính sách",Không có,"Cả hai trạng thái đều truy cập bình thường, trang chính sách là trang công khai.",Không,Truy cập bình thường ở cả hai trạng thái.,PASS,

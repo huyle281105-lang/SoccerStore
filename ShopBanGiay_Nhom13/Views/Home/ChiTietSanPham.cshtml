@@ -1,0 +1,190 @@
+﻿@{
+    ViewBag.Title = "Chi tiết sản phẩm";
+    Layout = "~/Views/Shared/_LayoutKhachHang.cshtml";
+}
+@model ShopBanGiay_Nhom13.Models.SANPHAM
+
+<div class="container mt-5 text-white container-service">
+    <div class="row">
+        <!-- Cột trái: Hình ảnh -->
+        <div class="col-7 text-center">
+            <div class="row position-relative">
+                @if (Model.MAKM != null)
+                {
+                    <span class="badge bg-danger position-absolute top-0 start-0 w-25">-@Model.KHUYENMAI.PHANTRAMGIAM%</span>
+                    <img src="~/Content/Images/@Model.HINHANH" alt="@Model.TENSP" class="img-fluid" style="border-radius: 15px; border: 1px solid #343a40; overflow: hidden" />
+                }
+                else
+                {
+                    <img src="~/Content/Images/@Model.HINHANH" alt="@Model.TENSP" class="img-fluid" style="border-radius: 15px; border: 1px solid #343a40; overflow: hidden" />
+                }
+            </div>
+
+            <!-- Thông tin hỗ trợ -->
+            <div class="row mt-5 p-3 shadow-sm mb-3 border" style="border-radius: 15px;">
+                <h5 class="text-start mb-3 my-2"><i class="fa-solid fa-users"></i>  Hỗ trợ đặt hàng</h5>
+                <div class="my-2 d-flex">
+                    <div class="col-6 d-flex gap-4">
+                        <div>
+                            <img src="~/Content/Images/icon-call.jpg" />
+                        </div>
+                        <div class="text-start">
+                            <label>Putin: 078.246.5555</label>
+                            <label>Steven Kiên: 0923.833.666</label>
+                        </div>
+                    </div>
+                    <div class="col-6 d-flex gap-4">
+                        <div>
+                            <img src="~/Content/Images/zalo.jpg" />
+                        </div>
+                        <div class="text-start">
+                            <label>Putin: 078.246.5555</label>
+                            <label>Steven Kiên: 0923.833.666</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cột phải: Thông tin sản phẩm -->
+        <div class="col-5 px-5">
+            <h3>@Model.TENSP</h3>
+            <p><strong>Mã SP:</strong> @Model.MASP</p>
+            <p><strong>Loại:</strong> <span class="text-warning">@Model.LOAISP.TENL</span></p>
+            <p><strong>Thương hiệu:</strong> @Model.THUONGHIEU.TENTH</p>
+
+            <div class="mb-3">
+                @if (Model.MAKM != null)
+                {
+                    <span class="fs-3 text-danger fw-bold">@String.Format("{0:N0} ₫", Model.GIA - (Model.GIA * Model.KHUYENMAI.PHANTRAMGIAM / 100))</span>
+                    <span class="text-muted text-decoration-line-through ms-2">@String.Format("{0:N0} ₫", Model.GIA)</span>
+                }
+                else
+                {
+                    <span class="fs-3 text-danger fw-bold">@String.Format("{0:N0} ₫", Model.GIA)</span>
+                }
+            </div>
+
+            <p>@Model.MOTA</p>
+            <form action="/Cart/Add" method="post">
+                <!-- Chọn size -->
+                <div class="my-3">
+                    @if (Convert.ToInt32(Model.SANPHAM_SIZE.Count()) != 0)
+                    {
+                        <strong>Chọn size:</strong><br />
+                        foreach (var sz in Model.SANPHAM_SIZE)
+                        {
+                            <button class="btn btn-outline-light m-1">@sz.SIZE.SOSIZE</button>
+                        }
+                    }
+                </div>
+                <div>
+                    <input type="text" name="masp" value="@Model.MASP" hidden />
+                </div>
+
+                <!-- Chọn số lượng -->
+                <div class="my-3">
+                    <label for="quantity">Số lượng:</label>
+                    <input type="number" id="quantity" name="quantity" value="1" min="1" class="form-control w-25 d-inline ms-2 text-center" />
+                </div>
+
+                <!-- Nút mua -->
+                @*action="@Url.Action("ThemVaoGio", "GioHang", new { id = Model.MASP })"*@
+
+            <button  class="btn btn-primary">
+                Thêm vào giỏ hàng
+            </button>
+
+              
+            </form>
+
+        </div>
+    </div>
+
+
+
+    <div class="mt-4">
+        <div class="row text-light bg-service-section p-3 rounded-3">
+            <div class="col-3">
+                <div class="p-3 bg-dark rounded-3 d-flex align-items-center service-info">
+                    <i class="fa-solid fa-truck-fast fs-2 me-3"></i>
+                    <div>
+                        <strong>Giao hàng nội thành</strong><br>
+                        <span>hoả tốc 60 - 120 phút</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="p-3 bg-dark rounded-3 d-flex align-items-center service-info">
+                    <i class="fa-solid fa-heart fs-2 me-3"></i>
+                    <div>
+                        <strong>Miễn phí giao hàng</strong><br>
+                        <span>và đồng kiểm khi nhận</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="p-3 bg-dark rounded-3 d-flex align-items-center service-info">
+                    <i class="fa-solid fa-gift fs-2 me-3"></i>
+                    <div>
+                        <strong>Tặng Combo Túi + Tất</strong>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="p-3 bg-dark rounded-3 d-flex align-items-center service-info">
+                    <i class="fa-solid fa-rotate-left fs-2 me-3"></i>
+                    <div>
+                        <strong>Đổi trả trong vòng</strong><br>
+                        <span>15 ngày</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style>
+    /*    body {
+        background-color: #121212;
+        color: white;
+        font-family: 'Roboto', sans-serif;
+    }*/
+
+    .badge {
+        font-size: 0.9rem;
+        padding: 6px 10px;
+        border-radius: 8px;
+    }
+
+    button.btn-outline-light:hover {
+        background-color: #ffc107;
+        color: #000;
+    }
+
+    .bg-service-section {
+        background: #343a40;
+    }
+
+    .bg-dark {
+        background-color: #222831 !important;
+        transition: all 0.3s ease;
+    }
+
+    .service-info {
+        height: 100px;
+    }
+
+    .bg-dark:hover {
+        transform: translateY(-2px);
+    }
+
+    .container-service i {
+        color: #ffcc00;
+    }
+    .btn-buy:hover{
+        background: #ee810d;
+        transition: 0.6s ease;
+    }
+</style>

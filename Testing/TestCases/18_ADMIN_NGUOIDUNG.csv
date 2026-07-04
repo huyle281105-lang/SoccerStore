@@ -1,0 +1,23 @@
+Your Company LOGO,Project Name: SoccerStore,,Test Designed by:,Hồ Quốc Nam,,,,,
+,Module Name: Quản lý khách hàng Admin,,Test Designed date:,23/05/2026,,,,,
+,Release Version: 1.0,,Test Executed by:,Hồ Quốc Nam,,,,,
+,,,Test Execution date:,23/05/2026,,,,,
+Your Company LOGO,Project Name: SoccerStore,,Test Designed by:,Hồ Quốc Nam,,,,,
+,Module Name: Quản lý khách hàng Admin,,Test Designed date:,23/05/2026,,,,,
+,Release Version: 1.0,,Test Executed by:,Hồ Quốc Nam,,,,,
+,,,Test Execution date:,23/05/2026,,,,,
+Pre-condition,- Đăng nhập bằng tài khoản Admin.,,,,,,,,
+Test Case#,Test Title/ Scenario,Test Summary,Test Steps,Test Data,Expected Result,Post-condition,Actual Result,Status,Notes
+TC01,Xem danh sách khách hàng/người dùng,Kiểm tra chức năng hiển thị danh sách người dùng trong Admin,"1. Truy cập đường dẫn quản lý người dùng /Home/NguoiDung
+2. Quan sát bảng dữ liệu hiển thị",Không có,"Hiển thị bảng chứa danh sách tất cả người dùng (KHACHHANG) trong hệ thống gồm các thông tin: Mã KH, Tên KH, Email, Số điện thoại, Vai trò.",Không,Hiển thị đúng danh sách người dùng.,PASS,
+TC02,Kiểm tra hiển thị đầy đủ thông tin người dùng,Kiểm tra thông tin chi tiết các cột trong bảng người dùng,1. Đối chiếu các cột trên bảng quản lý người dùng với cấu trúc DB,Không có,"Bảng hiển thị đầy đủ các cột: Mã khách hàng, Tên khách hàng, Số điện thoại, Email, Mật khẩu, Vai trò.",Không,Các cột thông tin hiển thị chính xác.,PASS,
+TC03,Truy cập trang quản lý người dùng khi chưa đăng nhập,Kiểm tra bảo mật phân quyền trang người dùng,"1. Đảm bảo chưa đăng nhập tài khoản nào
+2. Truy cập trực tiếp link /Home/NguoiDung",Không có,Hệ thống chặn quyền truy cập trực tiếp và chuyển hướng về trang Đăng nhập /Auth/SignIn.,Giao diện bảng danh sách khách hàng hiển thị.,Truy cập thành công không bị chặn.,FAIL,Cần thêm kiểm tra phân quyền Admin cho action NguoiDung.
+TC04,Truy cập trang quản lý người dùng bằng tài khoản User thường,Kiểm tra chặn tài khoản thường xem danh sách người dùng,"1. Đăng nhập tài khoản user@gmail.com
+2. Truy cập trực tiếp link /Home/NguoiDung",Tài khoản User thường,Hệ thống chặn quyền truy cập của tài khoản User thường và chuyển hướng về trang chủ /Home/Index.,Giao diện danh sách người dùng hiển thị.,Truy cập thành công.,FAIL,Cần thêm thuộc tính chặn quyền User thường đối với trang NguoiDung.
+TC05,Hiển thị mật khẩu khách hàng dưới dạng bản rõ,Kiểm tra tính an toàn thông tin mật khẩu khách hàng,"1. Quan sát cột ""Mật khẩu"" trên bảng quản lý người dùng",Không có,Mật khẩu của khách hàng không được hiển thị (hoặc được băm/mã hóa hoặc ẩn trên giao diện quản trị) để tránh rủi ro rò rỉ.,Không,Mật khẩu hiển thị bản rõ.,FAIL,Đây là hành vi thực tế của mã nguồn và DB hiện tại. Cần mã hóa băm mật khẩu và ẩn trên giao diện.
+TC06,Kiểm tra hiển thị đầy đủ các tài khoản Admin và User,Kiểm tra tính đầy đủ danh sách người dùng,"1. Đếm số lượng tài khoản trong DB
+2. Đối chiếu số lượng dòng trên giao diện",Không có,Bảng hiển thị đầy đủ tất cả tài khoản đang có trong DB bao gồm cả tài khoản admin@shop.com và user@gmail.com.,Không,Số lượng tài khoản hiển thị đầy đủ.,PASS,
+TC07,Kiểm tra sắp xếp danh sách khách hàng theo mã khách hàng,Kiểm tra thứ tự sắp xếp danh sách người dùng,1. Quan sát cột Mã KH trong bảng dữ liệu,Không có,Danh sách khách hàng hiển thị theo thứ tự mặc định của CSDL tăng dần theo Mã KH.,Không,Thứ tự hiển thị đúng.,PASS,
+TC08,Kiểm tra tính chính xác của tổng số lượng khách hàng,Kiểm tra khớp dữ liệu khách hàng,"1. Xem tổng số lượng bản ghi hiển thị trên bảng
+2. Chạy câu lệnh SELECT COUNT(*) FROM KHACHHANG trong SQL",Không có,Số lượng bản ghi hiển thị trên bảng khớp hoàn toàn với số lượng thực tế trong CSDL.,Không,Số lượng khớp hoàn toàn.,PASS,

@@ -1,0 +1,25 @@
+# Thư mục cấu hình của Visual Studio (gây ra lỗi "Permission denied")
+.vs/
+
+# Thư mục chứa các gói NuGet (nếu có)
+packages/
+
+# Thư mục và tệp sinh ra trong quá trình Build
+[Bb]in/
+[Oo]bj/
+*.exe
+*.pdb
+*.suo
+*.user
+
+# File backup và log tự sinh (đề phòng sau này lại xuất hiện)
+*.bak
+UpgradeLog*.htm
+
+# Node.js / Playwright
+node_modules/
+playwright-report/
+test-results/
+
+.env
+Testing/.env

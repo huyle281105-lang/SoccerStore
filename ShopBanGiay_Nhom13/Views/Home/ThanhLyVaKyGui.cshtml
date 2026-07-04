@@ -1,0 +1,395 @@
+﻿@{
+    ViewBag.Title = "ThanhLyVaKyGui";
+    Layout = "~/Views/Shared/_LayoutKhachHang.cshtml";
+}
+@using ShopBanGiay_Nhom13.Models;
+@model List<ShopBanGiay_Nhom13.Models.SANPHAM>
+<div class="container text-white my-3">
+
+    <div class="service-header" style="text-align: center; padding: 0 0;">
+        <h1 class="section-title-highlight">Thanh lý, ký gửi giày đá bóng đã qua sử dụng</h1>
+
+        <p class="service-description">
+            Nhằm hỗ trợ Khách hàng có nhu cầu chuyển đổi, và tìm mua những đôi giày đã qua sử dụng với chi phí thấp và chất lượng cao nhất. Soccerstore.vn nhận kí gửi, thẩm định giày đá bóng chính hãng đã qua sử dụng, đảm bảo giày còn tốt nhất 80% trở lên. Hãy liên hệ trực tiếp để biết được tình trạng và giá cả từng mẫu mã!
+        </p>
+    </div>
+
+    <section class="commitments-section team-printing-offers" style="background: none; padding-top: 10px;">
+        <div class="container">
+            <h4 class="section-title-dark text-white">CAM KẾT BỞI SOCCERSTORE.VN</h4>
+
+            <div class="offers-grid">
+
+                <div class="offer-item">
+                    <div class="offer-icon-box" style="background-color: var(--highlight-color);"><span class="offer-checkmark">✔️</span></div>
+                    <h3 class="offer-title" style="color: var(--text-color);">Hàng chính hãng</h3>
+                    <p class="offer-detail">
+                        Chỉ thanh lý, ký gửi giày đá bóng chính hãng.
+                    </p>
+                </div>
+
+                <div class="offer-item">
+                    <div class="offer-icon-box" style="background-color: var(--highlight-color);"><span class="offer-checkmark">✔️</span></div>
+                    <h3 class="offer-title" style="color: var(--text-color);">Tình trạng tốt</h3>
+                    <p class="offer-detail">
+                        Đảm bảo thẩm định tình trạng từ 80% - 90% trở lên mới được đáp ứng.
+                    </p>
+                </div>
+
+                <div class="offer-item">
+                    <div class="offer-icon-box" style="background-color: var(--highlight-color);"><span class="offer-checkmark">✔️</span></div>
+                    <h3 class="offer-title" style="color: var(--text-color);">Hỗ trợ sửa chữa</h3>
+                    <p class="offer-detail">
+                        Hỗ trợ sửa chữa toàn thời gian sử dụng với chi phí thấp hơn 50%.
+                    </p>
+                </div>
+
+                <div class="offer-item">
+                    <div class="offer-icon-box" style="background-color: var(--highlight-color);"><span class="offer-checkmark">✔️</span></div>
+                    <h3 class="offer-title" style="color: var(--text-color);">Ảnh thật 100%</h3>
+                    <p class="offer-detail">
+                        Toàn bộ ảnh thật 100% không chỉnh sửa, thể hiện rõ tình trạng giày các góc độ.
+                    </p>
+                </div>
+
+                <div class="offer-item">
+                    <div class="offer-icon-box" style="background-color: var(--highlight-color);"><span class="offer-checkmark">✔️</span></div>
+                    <h3 class="offer-title" style="color: var(--text-color);">Mô tả chi tiết</h3>
+                    <p class="offer-detail">
+                        Đánh giá, thẩm định và mô tả chính xác tình trạng để KH có thể dễ dàng lựa chọn.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing-table-section">
+        <h2 class="section-title-highlight text-center">BẢNG GIÁ DỊCH VỤ THANH LÝ, KÝ GỬI</h2>
+
+        <table class="pricing-table">
+            <thead>
+                <tr>
+                    <th class="service-col">Dịch vụ</th>
+                    <th class="fee-col">Chi phí</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="service-col">Giày đá bóng mua tại soccerstore.vn</td>
+                    <td class="fee-col highlight-fee">Miễn phí dịch vụ</td>
+                </tr>
+                <tr>
+                    <td class="service-detail-row" colspan="2">
+                        Sản phẩm mua tại Soccerstore.vn sẽ được miễn phí hoàn toàn dịch vụ thanh lý, ký gửi. Anh em sẽ nhận lại 100% giá trị hàng hóa thanh lý.
+                    </td>
+                </tr>
+                <tr>
+                    <td class="service-col">Giày đá bóng mua tại nơi khác</td>
+                    <td class="fee-col">15% giá trị</td>
+                </tr>
+                <tr>
+                    <td class="service-detail-row" colspan="2">
+                        Soccerstore.vn sẽ chỉ thu phí khi kí gửi đã bán được cho khách hàng.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section class="clearance-products-section">
+        <h2 class="section-title-dark">Sản phẩm thanh lý</h2>
+
+        <div class="product-grid">
+
+            @if (Model != null && Model.Any())
+            {
+                foreach (SANPHAM sp in Model)
+                {
+                    <a class="product-item" href="/Home/ChiTietSanPham?masp=@sp.MASP">
+
+                        <img src="~/Content/Images/@sp.HINHANH" alt="@sp.TENSP" />
+
+                        <div class="product-info">
+                            <p class="product-name">@sp.TENSP (@sp.MASP)</p>
+
+                            <div class="price-box">
+                                <span class="single-price">
+                                    @String.Format("{0:N0} ₫", sp.GIA)
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                }
+            }
+            else
+            {
+                <p class="text-center w-100" style="grid-column: 1 / -1;">Hiện không có sản phẩm thanh lý nào.</p>
+            }
+        </div>
+    </section>
+</div>
+
+
+<style>
+    /* Biến Màu Sắc Chung */
+    :root {
+        --dark-bg: #1a1a1a;
+        --text-color: #ffffff;
+        --highlight-color: #a4e53e; /* Xanh lá/vàng chanh (Màu mặc định) */
+        --font-family: Arial, sans-serif;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding-left: 15px;
+        padding-right: 15px;
+        font-family: var(--font-family);
+    }
+
+    /* Tiêu đề */
+    .section-title-highlight {
+        font-size: 32px;
+        font-weight: bold;
+        color: #d1d326;
+        margin-bottom: 10px;
+    }
+
+    .section-title-dark {
+        font-size: 26px;
+        font-weight: bold;
+        color: #ffffff;
+        margin-bottom: 30px;
+        text-align: center;
+        padding-top: 20px;
+    }
+
+    .service-description {
+        font-size: 16px;
+        line-height: 1.6;
+        color: #ccc;
+        max-width: 900px;
+        margin: 0 auto 50px;
+    }
+
+    /* === KHỐI CAM KẾT === */
+    .offers-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 30px 20px;
+        margin-bottom: 40px;
+    }
+
+    .offer-item {
+        width: 100%;
+        max-width: 200px;
+        text-align: center;
+        padding: 0 10px;
+    }
+
+    .offer-icon-box {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 10px;
+        background-color: var(--highlight-color);
+    }
+
+    .offer-checkmark {
+        color: var(--dark-bg);
+        font-size: 24px;
+        line-height: 1;
+        font-weight: bold;
+    }
+
+    .offer-title {
+        font-size: 16px;
+        font-weight: bold;
+        margin-bottom: 8px;
+        text-transform: uppercase;
+        color: var(--text-color);
+    }
+
+    .offer-detail {
+        font-size: 14px;
+        color: #bbb;
+        line-height: 1.5;
+        min-height: 45px;
+    }
+
+    /* === KHỐI BẢNG GIÁ === */
+    .pricing-table-section {
+        padding: 0px 0;
+    }
+
+    .pricing-table {
+        width: 100%;
+        max-width: 900px;
+        margin: 0 auto;
+        border-collapse: collapse;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+        .pricing-table th, .pricing-table td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid #333;
+            color: var(--text-color); /* Thêm để đảm bảo text trong bảng trắng */
+        }
+
+        .pricing-table thead {
+            background-color: #333;
+        }
+
+        .pricing-table tbody tr:nth-child(even) {
+            background-color: #282828;
+        }
+
+        .pricing-table tbody tr:nth-child(odd) {
+            background-color: #1f1f1f;
+        }
+
+    .service-col {
+        width: 70%;
+        font-weight: bold;
+        font-size: 16px;
+    }
+
+    .fee-col {
+        width: 30%;
+        text-align: right;
+        font-weight: bold;
+        font-size: 16px;
+    }
+
+    .highlight-fee {
+        color: var(--highlight-color);
+    }
+
+    .service-detail-row {
+        font-style: italic;
+        font-size: 13px;
+        color: #999;
+        padding-top: 0 !important;
+        padding-bottom: 15px !important;
+        border: none !important;
+    }
+
+    /* === KHỐI SẢN PHẨM THANH LÝ === */
+    .clearance-products-section {
+        padding: 40px 0;
+        text-align: center;
+    }
+
+    .product-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 20px;
+        margin-top: 30px;
+    }
+
+    .product-item {
+        display: block;
+        background-color: #1a1a1a; /* Giữ nền khung ngoài thống nhất */
+        border-radius: 8px;
+        text-decoration: none;
+        color: var(--text-color);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        overflow: hidden;
+        height: 100%;
+        cursor: default;
+        border: 1px solid #282828;
+    }
+
+        .product-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(164, 229, 62, 0.2);
+        }
+
+        .product-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            border-radius: 8px 8px 0 0;
+            padding: 10px;
+        }
+
+    .product-info {
+        padding: 15px;
+        text-align: left;
+        border-radius: 0 0 8px 8px;
+    }
+
+    .product-name {
+        font-size: 14px;
+        line-height: 1.4;
+        min-height: 40px;
+        color: #eee;
+        margin-bottom: 10px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .price-box {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .single-price {
+        font-size: 16px;
+        font-weight: bold;
+        color: #dc3545; /* Dùng màu Highlight thống nhất */
+    }
+
+    .contact-price {
+        color: orange;
+    }
+
+    /* === RESPONSIVE === */
+
+    @@media (max-width: 1200px) {
+        .product-grid {
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+
+    @@media (max-width: 992px) {
+        .product-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    @@media (max-width: 768px) {
+        .section-title-highlight {
+            font-size: 28px;
+        }
+
+        .offer-item {
+            max-width: calc(50% - 10px);
+        }
+
+        .pricing-table {
+            border-radius: 0;
+            margin: 0;
+        }
+    }
+
+    @@media (max-width: 600px) {
+        .product-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .product-item img {
+            height: 150px;
+        }
+    }
+</style>

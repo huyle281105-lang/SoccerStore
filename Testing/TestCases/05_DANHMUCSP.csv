@@ -1,0 +1,27 @@
+Your Company LOGO,Project Name: SoccerStore,,Test Designed by:,Hồ Quốc Nam,,,,,
+,Module Name: Danh mục sản phẩm,,Test Designed date:,23/05/2026,,,,,
+,Release Version: 1.0,,Test Executed by:,Hồ Quốc Nam,,,,,
+,,,Test Execution date:,23/05/2026,,,,,
+Pre-condition,- CSDL đã có sản phẩm thuộc các danh mục Giày và Phụ kiện.,,,,,,,,
+Test Case#,Test Title/ Scenario,Test Summary,Test Steps,Test Data,Expected Result,Post-condition,Actual Result,Status,Notes
+TC01,Xem tất cả giày bóng đá,Kiểm tra hiển thị danh sách giày bóng đá,"1. Chọn mục ""Giày bóng đá"" trên menu chính
+2. Quan sát danh sách sản phẩm hiển thị",Không có,Hiển thị toàn bộ sản phẩm thuộc danh mục Giày (các sản phẩm có MAL_CHA là null trong CSDL).,Không,Hiển thị chính xác các sản phẩm giày.,PASS,
+TC02,Xem tất cả phụ kiện,Kiểm tra hiển thị danh sách phụ kiện,"1. Chọn mục ""Phụ kiện"" -> ""Tất cả phụ kiện"" trên menu chính
+2. Quan sát danh sách sản phẩm hiển thị",Không có,"Hiển thị toàn bộ sản phẩm thuộc danh mục Phụ kiện (các sản phẩm có MAL_CHA == ""L001"").",Không,Hiển thị chính xác các sản phẩm phụ kiện.,PASS,
+TC03,Lọc sản phẩm theo Loại sản phẩm cụ thể,Kiểm tra lọc sản phẩm theo loại,"1. Click chọn một Loại sản phẩm cụ thể (ví dụ: Giày cỏ nhân tạo)
+2. Quan sát danh sách",Mã loại (MAL) cụ thể,Chỉ hiển thị các sản phẩm thuộc Loại sản phẩm đã chọn.,Không,Lọc đúng loại sản phẩm.,PASS,
+TC04,Lọc sản phẩm theo Thương hiệu,Kiểm tra lọc sản phẩm theo thương hiệu,"1. Click chọn một Thương hiệu cụ thể (ví dụ: Nike hoặc Adidas)
+2. Quan sát danh sách",Mã thương hiệu (MATH) cụ thể,Chỉ hiển thị các sản phẩm thuộc Thương hiệu đã chọn.,Không,Lọc đúng thương hiệu.,PASS,
+TC05,Xem danh mục khi không có sản phẩm nào tương ứng,Kiểm tra hiển thị giao diện trống khi không có sản phẩm,"1. Truy cập vào bộ lọc loại sản phẩm chưa có sản phẩm nào được gán mã loại này
+2. Quan sát giao diện",Mã loại: L999 (Chưa có sản phẩm),"Giao diện hiển thị danh sách trống, không có sản phẩm nào, không gây lỗi runtime.",Không,Hiển thị danh sách trống.,PASS,
+TC06,Kiểm tra hiển thị Breadcrumb dẫn đường,Kiểm tra thanh breadcrumb hiển thị đúng đường dẫn,"1. Truy cập danh mục Giày cỏ nhân tạo
+2. Quan sát thanh dẫn đường (Breadcrumb) phía trên danh sách sản phẩm",Không có,Hiển thị chính xác: Trang chủ > Giày bóng đá > Giày cỏ nhân tạo.,Không,Breadcrumb hiển thị chính xác.,PASS,
+TC07,Lọc thương hiệu khi đang xem phụ kiện,Kiểm tra lọc thương hiệu kết hợp với loại sản phẩm,"1. Truy cập danh mục Phụ kiện
+2. Click chọn bộ lọc thương hiệu Nike
+3. Quan sát danh sách",Thương hiệu Nike,Chỉ hiển thị các phụ kiện thuộc thương hiệu Nike.,Không,Lọc sản phẩm chính xác.,PASS,
+TC08,Click vào hình ảnh sản phẩm để xem chi tiết,Kiểm tra chuyển hướng từ ảnh sản phẩm sang chi tiết sản phẩm,"1. Click vào ảnh của sản phẩm bất kỳ trong danh mục
+2. Quan sát địa chỉ URL",Không có,Hệ thống chuyển hướng sang trang chi tiết sản phẩm tương ứng (/Home/ChiTietSanPham?masp=SPxxx).,Không,Chuyển hướng thành công.,PASS,
+TC09,Click vào tên sản phẩm để xem chi tiết,Kiểm tra chuyển hướng từ tên sản phẩm sang chi tiết,"1. Click vào tiêu đề tên sản phẩm trong danh mục
+2. Quan sát địa chỉ URL",Không có,Hệ thống chuyển hướng sang trang chi tiết sản phẩm tương ứng.,Không,Chuyển hướng thành công.,PASS,
+TC10,Kiểm tra hiển thị giá bán và phần trăm giảm giá,Kiểm tra hiển thị nhãn giá và phần trăm khuyến mãi trong danh mục,"1. Tìm sản phẩm đang được áp dụng khuyến mãi trong danh mục
+2. Quan sát giá hiển thị",Sản phẩm có khuyến mãi,"Hiển thị giá gốc bị gạch ngang và giá bán thực tế nổi bật bên cạnh, kèm nhãn phần trăm giảm (ví dụ: -20%).",Không,Giá khuyến mãi hiển thị chính xác.,PASS,

@@ -1,0 +1,44 @@
+﻿@{
+    ViewBag.Title = "DatHanhThanhCong";
+    Layout = "~/Views/Shared/_LayoutKhachHang.cshtml";
+}
+@model ShopBanGiay_Nhom13.Models.HOADON
+
+@{
+    ViewBag.Title = "Đặt hàng thành công";
+    Layout = "~/Views/Shared/_LayoutKhachHang.cshtml";
+
+    var mahd = Model.MAHD ?? (ViewBag.MaHD as string) ?? TempData["MAHD"] as string;
+    var ngayTao = Model.NGAYTAO;
+    var ngayHenGiao = Model.NGAYHENGIAO;
+    var kh = Model.KHACHHANG;
+    var items = Model.CHITIETHOADONs.ToList();
+    decimal total = Model.TONGTIEN ?? 0m;
+}
+
+<div class="container bg-white my-5">
+    <div class="page-header">
+        <h2>Đặt hàng thành công</h2>
+    </div>
+
+    @if (string.IsNullOrEmpty(mahd) && !items.Any())
+    {
+        <div class="alert alert-success">
+            Cảm ơn bạn! Đơn hàng của bạn đã được nhận.
+        </div>
+    }
+    else
+    {
+        <div class="panel panel-default">
+           
+
+                <div class="well">
+                    <p>Chúng tôi đã nhận đơn hàng và sẽ xử lý trong thời gian sớm nhất. Mã đơn hàng của bạn là <strong>@mahd</strong></p>
+                </div>
+
+                <div class="btn-group">
+                    <a href="@Url.Action("Index", "Home")" class="btn btn-primary">Tiếp tục mua sắm</a>
+                </div>
+        </div>
+    }
+</div>

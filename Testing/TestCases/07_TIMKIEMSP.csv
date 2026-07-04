@@ -1,0 +1,26 @@
+Your Company LOGO,Project Name: SoccerStore,,Test Designed by:,Hồ Quốc Nam,,,,,
+,Module Name: Tìm kiếm sản phẩm,,Test Designed date:,23/05/2026,,,,,
+,Release Version: 1.0,,Test Executed by:,Hồ Quốc Nam,,,,,
+,,,Test Execution date:,23/05/2026,,,,,
+Pre-condition,- Đang ở trang bất kỳ của website có chứa ô tìm kiếm trên header.,,,,,,,,
+Test Case#,Test Title/ Scenario,Test Summary,Test Steps,Test Data,Expected Result,Post-condition,Actual Result,Status,Notes
+TC01,Tìm kiếm sản phẩm với từ khóa hợp lệ,"Kiểm tra tính năng tìm kiếm sản phẩm theo tên, loại, thương hiệu","1. Nhập từ khóa tìm kiếm vào ô tìm kiếm ở header
+2. Nhấn nút tìm kiếm (kính lúp) hoặc nhấn Enter","Từ khóa: ""Nike""","Hệ thống chuyển hướng sang trang kết quả tìm kiếm /Home/SearchProducts, hiển thị danh sách các sản phẩm có tên, loại hoặc thương hiệu chứa từ khóa ""Nike"".",Không,"Tìm kiếm chính xác các sản phẩm chứa từ ""Nike"".",PASS,
+TC02,Tìm kiếm sản phẩm không có kết quả phù hợp,Kiểm tra thông báo khi tìm kiếm không ra kết quả,"1. Nhập từ khóa tìm kiếm không tồn tại trong hệ thống
+2. Nhấn nút tìm kiếm","Từ khóa: ""GiayKhongCo""","Hệ thống hiển thị thông báo ""Không tìm thấy sản phẩm nào phù hợp!"" trên trang kết quả.",Không,Hiển thị thông báo không tìm thấy sản phẩm.,PASS,
+TC03,Tìm kiếm sản phẩm với từ khóa rỗng,Kiểm tra báo lỗi khi để trống ô tìm kiếm,"1. Để trống ô tìm kiếm
+2. Nhấn nút tìm kiếm",Từ khóa: (Trống) hoặc chỉ chứa khoảng trắng,"Hệ thống hiển thị thông báo lỗi ""Vui lòng nhập từ khóa tìm kiếm!"" và không hiển thị sản phẩm nào.",Không,Hiển thị lỗi yêu cầu nhập từ khóa.,PASS,
+TC04,Tìm kiếm sản phẩm chứa ký tự đặc biệt,Kiểm tra tính bền vững của tính năng tìm kiếm,"1. Nhập các ký tự đặc biệt vào ô tìm kiếm
+2. Nhấn nút tìm kiếm","Từ khóa: ""Nike%"" hoặc ""Adidas_""","Hệ thống xử lý an toàn, hiển thị không tìm thấy hoặc kết quả khớp chính xác, không gây lỗi hệ thống.",Không,"Tìm kiếm hoạt động bình thường, không gây lỗi crash.",PASS,
+TC05,Tìm kiếm sản phẩm có dấu tiếng Việt,Kiểm tra bộ lọc tìm kiếm hỗ trợ Unicode tiếng Việt,"1. Nhập từ khóa tiếng Việt có dấu
+2. Nhấn tìm kiếm","Từ khóa: ""cỏ nhân tạo""","Hệ thống chuyển hướng sang trang tìm kiếm và hiển thị chính xác các sản phẩm chứa từ ""cỏ nhân tạo"".",Không,Tìm kiếm chính xác sản phẩm có dấu.,PASS,
+TC06,Tìm kiếm sản phẩm theo Mã sản phẩm,Kiểm tra tính năng tìm sản phẩm bằng mã chính xác,"1. Nhập mã sản phẩm ""SP001"" vào ô tìm kiếm
+2. Nhấn tìm kiếm","Từ khóa: ""SP001""",Hiển thị chính xác sản phẩm có mã SP001.,Không,Hiển thị đúng sản phẩm tìm kiếm.,PASS,
+TC07,Tìm kiếm theo tên Loại sản phẩm,Kiểm tra tìm kiếm sản phẩm theo tên danh mục loại,"1. Nhập từ khóa ""Phụ kiện"" vào ô tìm kiếm
+2. Nhấn tìm kiếm","Từ khóa: ""Phụ kiện""",Hiển thị tất cả sản phẩm thuộc loại Phụ kiện.,Không,Hiển thị chính xác các phụ kiện.,PASS,
+TC08,Tìm kiếm theo tên Thương hiệu,Kiểm tra tìm sản phẩm theo tên thương hiệu,"1. Nhập từ khóa ""Adidas"" vào ô tìm kiếm
+2. Nhấn tìm kiếm","Từ khóa: ""Adidas""",Hiển thị toàn bộ sản phẩm thuộc thương hiệu Adidas.,Không,Tìm kiếm đúng thương hiệu.,PASS,
+TC09,Tìm kiếm với từ khóa chứa khoảng trắng ở đầu và cuối,Kiểm tra xem hệ thống có tự trim khoảng trắng từ khóa tìm kiếm không,"1. Nhập ""  Nike  ""
+2. Nhấn nút tìm kiếm","Từ khóa: ""  Nike  ""","Hệ thống loại bỏ khoảng trắng thừa ở đầu/cuối và tìm kiếm ra các sản phẩm chứa từ ""Nike"".",Không,Tìm kiếm thành công.,PASS,
+TC10,Tìm kiếm với từ khóa cực dài,Kiểm tra khả năng chịu tải của ô tìm kiếm,"1. Nhập chuỗi từ khóa dài hơn 100 ký tự
+2. Nhấn nút tìm kiếm",Từ khóa có 120 ký tự,"Hệ thống xử lý bình thường, báo không tìm thấy kết quả và không gây crash server.",Không,Hoạt động bình thường.,PASS,

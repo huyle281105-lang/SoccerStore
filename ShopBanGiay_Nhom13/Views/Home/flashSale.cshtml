@@ -1,0 +1,67 @@
+﻿@{
+    ViewBag.Title = "flashSale";
+    Layout = "~/Views/Shared/_LayoutKhachHang.cshtml";
+}
+
+@using ShopBanGiay_Nhom13.Models;
+@model List<SANPHAM>
+<link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+
+
+<div class="container">
+    <div class="row my-3 text-center">
+        <h3 style="color: #ffd800">Clear Stock - xả kho giảm giá cực mạnh - kèo ngon</h3>
+        <p class="text-white">Các sản phẩm có thể hết nhanh, lẻ size chưa kịp cập nhật, quý khách vui lòng liên hệ trực tiếp để check nhé ^^</p>
+    </div>
+    <div class="row my-3">
+        @foreach (SANPHAM sp in Model)
+        {
+            <div class="col-3 mb-3">
+                <div class="card card-product card-item border-1">
+                    <span class="badge bg-danger position-absolute top-0 start-0 w-25" style="z-index: 999;">-@sp.KHUYENMAI.PHANTRAMGIAM%</span>
+                    <img class="card-img" src="~/Content/Images/@sp.HINHANH" style="height: 260px;" />
+                    <div class="card-body">
+                        <p style="height: 80px;">@sp.TENSP</p>
+                        <div class="mb-5">
+                            <span class="text-danger">@String.Format("{0:N0} ₫", sp.GIA - (sp.GIA * sp.KHUYENMAI.PHANTRAMGIAM / 100))</span>
+                            <span class="text-muted text-decoration-line-through ms-2">@String.Format("{0:N0} ₫", sp.GIA)</span>
+                        </div>
+                        <div class="text-end">
+                            <a class="text-decoration-none btn btn-secondary" href="/Home/ChiTietSanPham/?masp=@sp.MASP">Xem chi tiết</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+    .product-card {
+        background-color: #141414;
+        border: 1px solid #222;
+        border-radius: 8px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        height: 100%;
+    }
+
+    .card-body {
+        position: relative;
+        z-index: 2;
+        color: white;
+    }
+
+    .card-item {
+        background: #1a1a1a;
+        border-color: #232323;
+        padding: 8px;
+        z-index: 2;
+    }
+
+    .card-item img {
+        background: #1a1a1a;
+        padding: 8px;
+        z-index: 2;
+    }
+</style>

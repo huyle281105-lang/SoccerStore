@@ -1,0 +1,21 @@
+Your Company LOGO,Project Name: SoccerStore,,Test Designed by:,Hồ Quốc Nam,,,,,
+,Module Name: Quản lý hóa đơn Admin,,Test Designed date:,23/05/2026,,,,,
+,Release Version: 1.0,,Test Executed by:,Hồ Quốc Nam,,,,,
+,,,Test Execution date:,23/05/2026,,,,,
+Pre-condition,- Đăng nhập bằng tài khoản Admin.,,,,,,,,
+Test Case#,Test Title/ Scenario,Test Summary,Test Steps,Test Data,Expected Result,Post-condition,Actual Result,Status,Notes
+TC01,Xem danh sách hóa đơn đơn hàng,Kiểm tra chức năng hiển thị danh sách hóa đơn trong Admin,"1. Truy cập đường dẫn quản lý hóa đơn /Home/HoaDon
+2. Quan sát bảng dữ liệu hiển thị",Không có,"Hiển thị bảng chứa danh sách tất cả các hóa đơn (HOADON) trong hệ thống với các cột: Mã HD, Mã KH, Ngày tạo, Địa chỉ, Tổng tiền, v.v.",Không,Hiển thị đúng danh sách hóa đơn.,PASS,
+TC02,Kiểm tra hiển thị chi tiết thông tin từng hóa đơn,Kiểm tra xem các trường dữ liệu hóa đơn hiển thị đầy đủ và khớp với CSDL,1. Đối chiếu một dòng hóa đơn trên giao diện với dữ liệu trong bảng HOADON,Ví dụ: Hóa đơn HD001,"Mã HD, Mã KH, Ngày tạo, Địa chỉ giao và Tổng tiền hiển thị chính xác từng chữ số.",Không,Dữ liệu hiển thị chính xác.,PASS,
+TC03,Xem danh sách khi chưa có hóa đơn nào,Kiểm tra trạng thái trống của trang quản lý hóa đơn,"1. Xóa toàn bộ hóa đơn trong CSDL (ở môi trường test)
+2. Truy cập trang /Home/HoaDon",Không có hóa đơn trong DB,"Bảng hiển thị trống không có dữ liệu, không gây lỗi null tham chiếu trên trang web.",Không,Trang hiển thị bảng trống bình thường.,PASS,
+TC04,Truy cập trang quản lý hóa đơn khi chưa đăng nhập,Kiểm tra phân quyền bảo mật trang quản lý hóa đơn,"1. Chưa đăng nhập tài khoản nào
+2. Truy cập trực tiếp link /Home/HoaDon",Không có,Hệ thống chặn quyền truy cập trực tiếp và chuyển hướng về trang Đăng nhập /Auth/SignIn.,Giao diện danh sách hóa đơn hiển thị.,Truy cập thành công không bị chặn.,FAIL,Cần bổ sung kiểm tra session Admin trước khi trả về View HoaDon.
+TC05,Truy cập trang quản lý hóa đơn bằng tài khoản User thường,Kiểm tra tài khoản User thường có xem được hóa đơn không,"1. Đăng nhập tài khoản user@gmail.com
+2. Truy cập thẳng link /Home/HoaDon",Tài khoản User thường,Hệ thống chặn quyền truy cập của tài khoản User thường và chuyển hướng về trang chủ /Home/Index.,Giao diện danh sách hóa đơn hiển thị.,Truy cập thành công.,FAIL,Cần chặn quyền truy cập của User thường đối với action HoaDon.
+TC06,Kiểm tra tính tổng số tiền hóa đơn chính xác,Kiểm tra so khớp tổng tiền hóa đơn,"1. Chọn hóa đơn bất kỳ, xem tổng tiền
+2. Mở bảng chi tiết hóa đơn trong DB tính tổng tiền các sản phẩm mua",Ví dụ: HD001,Tổng tiền hiển thị trên giao diện khớp hoàn toàn với tổng giá trị chi tiết đơn hàng trong DB.,Không,Tổng tiền hiển thị chính xác.,PASS,
+TC07,Sắp xếp danh sách hóa đơn theo ngày tạo,Kiểm tra thứ tự sắp xếp hóa đơn hiển thị,"1. Truy cập danh sách hóa đơn
+2. Quan sát thứ tự hiển thị của các mã hóa đơn",Không có,Hóa đơn hiển thị theo thứ tự mặc định của CSDL (thông thường sắp xếp tăng dần hoặc giảm dần theo mã hóa đơn/ngày tạo).,Không,Thứ tự hiển thị bình thường.,PASS,
+TC08,Tìm kiếm hóa đơn trên danh sách,Kiểm tra tính năng tìm nhanh hóa đơn,"1. Nhập mã hóa đơn cần tìm vào thanh tìm kiếm (nếu giao diện hỗ trợ)
+2. Quan sát kết quả",Không có thanh tìm kiếm,"Giao diện hiện tại không có thanh tìm kiếm hóa đơn trực tiếp, Admin phải cuộn chuột để tìm thủ công.",Không,Hệ thống không hỗ trợ tìm kiếm hóa đơn trên giao diện.,PASS,Hành vi thiết kế giao diện thực tế của dự án.

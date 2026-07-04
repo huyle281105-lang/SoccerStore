@@ -1,0 +1,170 @@
+body {
+    font-size: .85em;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: #232323;
+    background-color: #fff;
+}
+
+header, footer, nav, section {
+    display: block;
+}
+
+
+/* Styles for basic forms
+-----------------------------------------------------------*/
+fieldset {
+    border: 1px solid #ddd;
+    padding: 0 1.4em 1.4em 1.4em;
+    margin: 0 0 1.5em 0;
+}
+
+legend {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+textarea {
+    min-height: 75px;
+}
+
+.editor-label {
+    margin: 1em 0 0 0;
+}
+
+.editor-field {
+    margin: 0.5em 0 0 0;
+}
+
+
+/* Styles for validation helpers
+-----------------------------------------------------------*/
+.field-validation-error {
+    color: #f00;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+.input-validation-error {
+    border: 1px solid #f00;
+    background-color: #fee;
+}
+
+.validation-summary-errors {
+    font-weight: bold;
+    color: #f00;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+
+
+.card-product {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 20px;
+}
+
+.card-product::before {
+    content: '';
+    position: absolute;
+    width: 100px;
+    height: 150%;
+    transition: all .3s linear;
+    z-index: 0;
+}
+
+.card-product:hover::before {
+    background-image: linear-gradient(180deg, #ff00c8, cyan);
+    animation: animate 5s ease infinite;
+}
+
+.card-product::after {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    background: #1a1a1a;
+    border-radius: 15px;
+    z-index: 1;
+}
+
+@keyframes animate {
+    from{
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* PC */
+@media (min-width: 1024px) {
+
+}
+
+/* Tablet */
+@media (min-width: 740px) and (max-width: 1023px) {
+
+}
+
+/* Mobile */
+@media (max-width: 740px) {
+    *{
+        font-size: 14px;
+        padding-left: 12px !important;
+    }
+    header {
+        height: 12vh !important;
+        position: fixed;
+        z-index: 999;
+        top: 0;
+        right: 0;
+        left: 0;
+        border-bottom: 1px solid #808080;
+    }
+    .logo-header{
+        width: 15%;
+        padding: 0;
+        margin: 0;
+        margin-right: 15px;
+        padding-right: 15px;
+    }
+    .search-header{
+        width: 50%;
+        right: 0 !important;
+    }
+    .search-header .btn{
+        padding: 10px 15px !important;
+    }
+    .Login-form{
+        display: none;
+    }
+    .header-bottom{
+        display: none;
+        
+    }
+    main{
+        background: #1a1a1a;
+        margin-top: 36px !important;
+    }
+    .banner-right, .banner-center, .banner-left{
+        width: 100% !important;
+    }
+    .service-item {
+        display: inline-block !important;
+        width: 36vh !important;
+        padding: 20px 0 !important;
+    }
+    .service-item i, .service-item p {
+        display: inline;
+    }
+    .card-featured {
+        width: 15vh;
+    }
+}

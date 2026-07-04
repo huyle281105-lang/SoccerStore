@@ -1,0 +1,23 @@
+Your Company LOGO,Project Name: SoccerStore,,Test Designed by:,Hồ Quốc Nam,,,,,
+,Module Name: Dashboard Admin,,Test Designed date:,23/05/2026,,,,,
+,Release Version: 1.0,,Test Executed by:,Hồ Quốc Nam,,,,,
+,,,Test Execution date:,23/05/2026,,,,,
+Pre-condition,- Đăng nhập bằng tài khoản có quyền Admin (admin@shop.com / admin123).,,,,,,,,
+Test Case#,Test Title/ Scenario,Test Summary,Test Steps,Test Data,Expected Result,Post-condition,Actual Result,Status,Notes
+TC01,Truy cập Dashboard Admin thành công với quyền Admin,Kiểm tra Admin truy cập trang quản lý sản phẩm,"1. Truy cập đường dẫn /Home/Dashboard
+2. Quan sát danh sách sản phẩm và các chức năng",Không có,"Truy cập thành công, hiển thị trang Dashboard quản lý sản phẩm dưới dạng bảng, có nút ""Thêm sản phẩm"", bộ lọc, tìm kiếm và nút ""Sửa"", ""Xóa"".",Không,Truy cập Dashboard thành công.,PASS,
+TC02,Truy cập Dashboard Admin thất bại đối với User thường,Kiểm tra chặn tài khoản không có quyền Admin truy cập Dashboard,"1. Đăng nhập tài khoản user@gmail.com
+2. Truy cập trực tiếp link /Home/Dashboard",Tài khoản user thường,"Hệ thống kiểm tra vai trò người dùng không phải Admin, chặn quyền và chuyển hướng về trang Đăng nhập /Auth/SignIn.",Không,Chuyển hướng về trang Đăng nhập.,PASS,
+TC03,Tìm kiếm nhanh sản phẩm trên Dashboard Admin,Kiểm tra tính năng lọc sản phẩm nhanh bằng hộp tìm kiếm trên Dashboard,"1. Tại ô ""Tìm sản phẩm..."", nhập mã hoặc tên sản phẩm
+2. Quan sát bảng sản phẩm hiển thị","Từ khóa: ""Nike""","Bảng sản phẩm tự động lọc ẩn các hàng không chứa từ ""Nike"" trên client-side (nhờ hàm javascript filterProducts).",Không,Lọc danh sách sản phẩm nhanh chóng trên giao diện.,PASS,
+TC04,Sắp xếp sản phẩm trên Dashboard Admin,Kiểm tra tính năng sắp xếp dữ liệu bảng sản phẩm,"1. Tại hộp ""Sắp xếp theo..."", chọn ""Giá tăng dần""
+2. Quan sát thứ tự các sản phẩm trong bảng",Sắp xếp: giaAsc,Bảng sản phẩm tự động sắp xếp lại các dòng theo thứ tự giá từ thấp đến cao trên giao diện (nhờ hàm javascript applySort).,Không,Sắp xếp đúng thứ tự giá tăng dần.,PASS,
+TC05,Kiểm tra phân trang Dashboard Admin,Kiểm tra chức năng phân trang hiển thị danh sách sản phẩm của Admin,"1. Truy cập Dashboard Admin
+2. Quan sát thanh phân trang ở cuối bảng",Không có,"Danh sách chỉ hiển thị tối đa 10 sản phẩm trên một trang. Có các nút trang 1, 2, 3... để chuyển trang.",Không,Phân trang hoạt động tốt.,PASS,
+TC06,Kiểm tra hiển thị đầy đủ các cột dữ liệu,Kiểm tra bảng sản phẩm Admin có đủ các cột cần thiết không,1. Quan sát tiêu đề bảng sản phẩm trên Dashboard,Không có,"Bảng có đủ các cột: Ảnh, Mã SP, Tên sản phẩm, Số lượng, Giá bán, Mô tả, Thao tác (Sửa, Xóa).",Không,Các cột hiển thị đầy đủ.,PASS,
+TC07,Nhấn Đăng xuất từ trang Dashboard Admin,Kiểm tra đăng xuất khi đang ở trang Admin,"1. Click nút ""Đăng xuất"" trên thanh điều hướng Admin",Không có,"Hủy session đăng nhập, chuyển hướng quay về trang Đăng nhập.",Session bị xóa.,Chuyển về trang Đăng nhập thành công.,PASS,
+TC08,Truy cập Dashboard Admin khi chưa đăng nhập,Kiểm tra chặn khách vãng lai truy cập Admin,"1. Mở trình duyệt mới chưa đăng nhập
+2. Truy cập thẳng link /Home/Dashboard",Không có,Hệ thống chuyển hướng người dùng về trang Đăng nhập /Auth/SignIn.,Không,Chuyển hướng thành công.,PASS,
+TC09,Kiểm tra hiển thị ảnh đại diện nhỏ (thumbnail),Kiểm tra ảnh sản phẩm hiển thị trên bảng Dashboard,1. Quan sát cột hình ảnh trên bảng sản phẩm Dashboard,Không có,Hiển thị hình ảnh thu nhỏ tương ứng của sản phẩm giúp Admin dễ nhận diện.,Không,Ảnh hiển thị đúng kích cỡ nhỏ gọn.,PASS,
+TC10,Kiểm tra liên kết menu điều hướng trên Dashboard,"Kiểm tra các tab chuyển trang HoaDon, NguoiDung","1. Click chọn mục ""Quản lý hóa đơn"" (hoặc Hóa Đơn) trên Dashboard
+2. Click chọn mục ""Quản lý người dùng""",Không có,Chuyển hướng thành công sang trang quản lý hóa đơn và quản lý người dùng tương ứng.,Không,Chuyển hướng thành công.,PASS,
